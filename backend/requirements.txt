@@ -1,0 +1,9 @@
+fastapi==0.162.2
+uvicorn[standard]==0.54.0
+pydantic==2.14.3
+PyYAML==6.0.3
+numpy==2.5.4
+scipy==1.18.1
+reportlab==5.1.0
+httpx==0.28.1
+pytest==9.2.0

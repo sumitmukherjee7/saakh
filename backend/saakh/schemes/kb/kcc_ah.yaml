@@ -1,0 +1,34 @@
+id: kcc_ah
+short: KCC (Dairy)
+name: {en: "Kisan Credit Card for Animal Husbandry & Dairying", hi: "पशुपालन और डेयरी के लिए किसान क्रेडिट कार्ड"}
+kind: credit_line
+agency: {en: "Banks, RRBs and co-operative banks", hi: "बैंक, ग्रामीण बैंक और सहकारी बैंक"}
+status: active
+apply_via: {name: Bank branch / dairy co-operative KCC camp, url: "https://dahd.gov.in/"}
+summary:
+  en: "Working-capital credit line for dairy farmers (feed, fodder, veterinary care, labour) at concessional interest, with an extra incentive for prompt repayment."
+  hi: "डेयरी पशुपालकों के लिए कार्यशील पूंजी ऋण (चारा, पशु-चिकित्सा, मज़दूरी) रियायती ब्याज पर, समय पर चुकाने पर अतिरिक्त प्रोत्साहन।"
+criteria:
+  id: kcc.all
+  all:
+    - id: kcc.animals
+      fact: owns_milch_animals
+      op: eq
+      value: true
+      text: {en: "Rears milch animals (owned or leased)", hi: "दुधारू पशु पालते हैं (अपने या किराए के)"}
+      cite: {source: dahd_kcc, loc: "Eligibility, dairy farmers"}
+    - id: kcc.sector
+      fact: sector
+      op: eq
+      value: allied_agri
+      text: {en: "Activity is animal husbandry / dairying", hi: "गतिविधि पशुपालन / डेयरी है"}
+      cite: {source: dahd_kcc, loc: "Scope, animal husbandry & dairying"}
+lender_checks:
+  - id: kcc.lc.default
+    fact: is_defaulter
+    op: eq
+    value: false
+    text: {en: "Lender credit norm: not in default with any bank", hi: "बैंक ऋण मानदंड: किसी बैंक का डिफ़ॉल्टर नहीं"}
+    cite: {source: lender_norm, loc: "Bank credit norms"}
+  - text: {en: "Your overall KCC limit is assessed by the bank (scale of finance per animal); ₹2 lakh is the collateral-free and subvention ceiling, not the limit", hi: "कुल KCC सीमा बैंक तय करता है (प्रति पशु वित्त मान); ₹2 लाख बिना गिरवी व अनुदान की सीमा है, कुल सीमा नहीं"}
+    cite: {source: dahd_kcc, loc: "Limit assessment"}

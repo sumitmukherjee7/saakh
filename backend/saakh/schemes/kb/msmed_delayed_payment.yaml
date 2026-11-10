@@ -1,0 +1,40 @@
+id: msmed_delayed_payment
+short: MSMED 45-day rule
+name: {en: "Protection against delayed payments (MSMED Act, 2006)", hi: "देरी से भुगतान के विरुद्ध सुरक्षा (एमएसएमईडी अधिनियम, 2006)"}
+kind: entitlement
+agency: {en: "Micro & Small Enterprise Facilitation Council (via MSME Samadhaan)", hi: "सूक्ष्म एवं लघु उद्यम सुविधा परिषद (एमएसएमई समाधान के माध्यम से)"}
+status: active
+apply_via: {name: MSME Samadhaan, url: "https://samadhaan.msme.gov.in/"}
+summary:
+  en: "A legal right, not a loan: if a business buyer pays a registered micro or small manufacturer/service supplier later than agreed (max 45 days), interest is due and the supplier can go to the Facilitation Council. A claim needs a specific overdue invoice. Retail and wholesale traders are excluded."
+  hi: "यह ऋण नहीं, क़ानूनी अधिकार है: यदि व्यावसायिक खरीदार पंजीकृत सूक्ष्म/लघु निर्माता या सेवा आपूर्तिकर्ता को तय समय (अधिकतम 45 दिन) से देर से भुगतान करे, तो ब्याज देय है और आपूर्तिकर्ता सुविधा परिषद जा सकता है। दावे के लिए विशिष्ट बकाया बिल चाहिए। खुदरा और थोक व्यापारी शामिल नहीं।"
+criteria:
+  id: msmed.all
+  all:
+    - id: msmed.mse
+      fact: enterprise_class
+      op: in
+      value: [micro, small]
+      text: {en: "Supplier is a micro or small enterprise (medium enterprises are outside Chapter V)", hi: "आपूर्तिकर्ता सूक्ष्म या लघु उद्यम है (मध्यम उद्यम अध्याय V से बाहर)"}
+      cite: {source: msmed_act, loc: "Section 2(n) & Chapter V"}
+    - id: msmed.not_trade
+      fact: sector
+      op: in
+      value: [manufacturing, services]
+      text: {en: "Manufacturer or service provider, retail/wholesale traders (NIC 45–47) are excluded", hi: "निर्माता या सेवा प्रदाता, खुदरा/थोक व्यापारी (NIC 45–47) शामिल नहीं"}
+      cite: {source: msme_trade_order_2021, loc: "Order dated 1 Sep 2021 (as reported)"}
+    - id: msmed.udyam
+      fact: udyam_registered
+      op: eq
+      value: true
+      text: {en: "Supplier holds Udyam registration", hi: "आपूर्तिकर्ता उद्यम पंजीकृत है"}
+      cite: {source: udyam_portal, loc: "Udyam registration replaces the memorandum under Section 8"}
+    - id: msmed.b2b
+      fact: has_b2b_buyers
+      op: eq
+      value: true
+      text: {en: "Sells goods/services to business buyers on credit", hi: "व्यावसायिक खरीदारों को उधार पर सामान/सेवा बेचते हैं"}
+      cite: {source: msmed_act, loc: "Section 15, liability of buyer"}
+lender_checks:
+  - text: {en: "A claim is per invoice: you need the buyer's acceptance date, the agreed period and the unpaid amount", hi: "दावा हर बिल पर होता है: खरीदार की स्वीकृति तिथि, तय अवधि और बकाया राशि चाहिए"}
+    cite: {source: msmed_act, loc: "Sections 15–17"}

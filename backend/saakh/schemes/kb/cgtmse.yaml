@@ -1,0 +1,50 @@
+id: cgtmse
+short: CGTMSE
+name: {en: "Credit Guarantee for Micro & Small Enterprises (CGTMSE)", hi: "सूक्ष्म एवं लघु उद्यम ऋण गारंटी (CGTMSE)"}
+kind: guarantee
+agency: {en: "CGTMSE, cover is sought by your lender, not by you", hi: "CGTMSE, गारंटी आपका बैंक लेता है, आप नहीं"}
+status: active
+apply_via: {name: Discuss with a CGTMSE member lender at sanction, url: "https://www.cgtmse.in/"}
+summary:
+  en: "A guarantee your lender can obtain on a collateral-free loan to a micro or small enterprise. Meeting the borrower conditions below does NOT mean you will get a loan or cover; the lender must be a CGTMSE member, appraise your loan and choose to seek cover."
+  hi: "एक गारंटी जो आपका बैंक सूक्ष्म या लघु उद्यम को बिना गिरवी ऋण पर ले सकता है। नीचे की शर्तें पूरी होने का मतलब ऋण या गारंटी मिलना नहीं है, बैंक CGTMSE सदस्य होना चाहिए, ऋण का आकलन करेगा और तय करेगा कि गारंटी ले या नहीं।"
+criteria:
+  id: cgtmse.all
+  all:
+    - id: cgtmse.mse
+      fact: enterprise_class
+      op: in
+      value: [micro, small]
+      text: {en: "A new or existing Micro or Small Enterprise (by both investment and turnover)", hi: "नया या मौजूदा सूक्ष्म या लघु उद्यम (निवेश और कारोबार दोनों से)"}
+      cite: {source: cgtmse_borrowers, loc: "Q1, eligible borrowers"}
+    - id: cgtmse.sector
+      fact: sector
+      op: in
+      value: [manufacturing, services, trading]
+      text: {en: "Engaged in manufacturing or service activity (agriculture excluded)", hi: "विनिर्माण या सेवा गतिविधि में संलग्न (कृषि शामिल नहीं)"}
+      cite: {source: cgtmse_borrowers, loc: "Q1, manufacturing or service activity excluding agriculture"}
+    - id: cgtmse.not_shg
+      fact: ownership_type
+      op: not_in
+      value: [shg]
+      text: {en: "Self-help group loans are not covered", hi: "स्वयं सहायता समूह ऋण कवर नहीं होते"}
+      cite: {source: cgtmse_borrowers, loc: "Q1 & Q8, SHGs / JLGs excluded"}
+    - id: cgtmse.udyam
+      fact: udyam_registered
+      op: eq
+      value: true
+      text: {en: "Borrower has an Udyam Registration Number (necessary, not sufficient)", hi: "उधारकर्ता के पास उद्यम पंजीकरण संख्या है (ज़रूरी, पर पर्याप्त नहीं)"}
+      cite: {source: cgtmse_borrowers, loc: "Q4, Udyam Registration mandatory for every borrower"}
+    - id: cgtmse.cap
+      fact: loan_amount_sought
+      op: lte
+      value: 100000000
+      text: {en: "Facility within the per-borrower ceiling (₹10 crore), a ceiling, not an amount you will get", hi: "प्रति उधारकर्ता सीमा (₹10 करोड़) के भीतर, यह अधिकतम सीमा है, मिलने वाली राशि नहीं"}
+      cite: {source: cgtmse_facilities, loc: "Q1, credit up to ₹10 crore covered"}
+lender_checks:
+  - text: {en: "Your lender must be a CGTMSE Member Lending Institution", hi: "आपका बैंक CGTMSE सदस्य ऋणदाता संस्था होना चाहिए"}
+    cite: {source: cgtmse_scheme_doc, loc: "Eligible institutions (MLIs)"}
+  - text: {en: "The lender appraises the loan and decides whether to seek cover; cover is never automatic", hi: "बैंक ऋण का आकलन कर तय करता है कि गारंटी ले या नहीं; गारंटी स्वतः नहीं मिलती"}
+    cite: {source: cgtmse_scheme_doc, loc: "Credit facilities eligible for cover"}
+  - text: {en: "The facility must be without collateral or third-party guarantee, and of an eligible type", hi: "ऋण बिना गिरवी/तीसरे पक्ष की गारंटी और पात्र प्रकार का होना चाहिए"}
+    cite: {source: cgtmse_scheme_doc, loc: "Credit facilities eligible for cover"}

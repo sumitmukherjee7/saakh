@@ -1,0 +1,46 @@
+id: pmmy
+short: MUDRA
+name: {en: Pradhan Mantri MUDRA Yojana (PMMY), hi: प्रधानमंत्री मुद्रा योजना}
+kind: loan
+agency: {en: "Banks, NBFCs, MFIs and RRBs (refinanced by MUDRA)", hi: "बैंक, एनबीएफसी, एमएफआई और ग्रामीण बैंक (मुद्रा द्वारा पुनर्वित्त)"}
+status: active
+apply_via: {name: JanSamarth portal / any bank branch, url: "https://www.jansamarth.in/"}
+summary:
+  en: "Collateral-free loans for non-farm micro enterprises, Shishu (up to ₹50,000), Kishore (₹50,001–₹5 lakh), Tarun (₹5–10 lakh) and Tarun Plus (₹10–20 lakh for repeat borrowers). The lender still appraises and decides."
+  hi: "गैर-कृषि सूक्ष्म उद्यमों के लिए बिना गिरवी ऋण, शिशु (₹50,000 तक), किशोर (₹50,001–₹5 लाख), तरुण (₹5–10 लाख) और तरुण प्लस (दोहराने वाले उधारकर्ताओं के लिए ₹10–20 लाख)। निर्णय बैंक का ही होगा।"
+criteria:
+  id: pmmy.all
+  all:
+    - id: pmmy.activity
+      fact: sector
+      op: in
+      value: [manufacturing, services, trading, allied_agri]
+      text: {en: "Income-generating activity in manufacturing, trading, services or activities allied to agriculture", hi: "विनिर्माण, व्यापार, सेवा या कृषि-संबद्ध गतिविधि में आय-सृजन कार्य"}
+      cite: {source: mudra_portal, loc: "About PMMY, eligible activities"}
+    - id: pmmy.entity
+      fact: ownership_type
+      op: in
+      value: [individual, proprietorship, partnership]
+      text: {en: "Non-corporate small business (individual, proprietorship or partnership)", hi: "गैर-कॉर्पोरेट लघु व्यवसाय (व्यक्ति, प्रोपराइटरशिप या साझेदारी)"}
+      cite: {source: mudra_portal, loc: "Who is eligible, non-corporate small business segment"}
+    - id: pmmy.cap
+      fact: loan_amount_sought
+      op: lte
+      value: 2000000
+      text: {en: "Loan amount up to ₹20 lakh", hi: "ऋण राशि ₹20 लाख तक"}
+      cite: {source: pib_mudra_tarun_plus, loc: "Tarun Plus, limit raised from ₹10 lakh to ₹20 lakh"}
+    - id: pmmy.tarun_plus
+      text: {en: "Above ₹10 lakh (Tarun Plus) only if an earlier Tarun loan was availed and repaid", hi: "₹10 लाख से अधिक (तरुण प्लस) केवल तब जब पहले तरुण ऋण लेकर चुकाया हो"}
+      cite: {source: pib_mudra_tarun_plus, loc: "Tarun Plus, eligibility of repeat borrowers"}
+      implies:
+        if: {fact: loan_amount_sought, op: gt, value: 1000000}
+        then: {fact: prior_mudra_tarun_repaid, op: eq, value: true}
+lender_checks:
+  - id: pmmy.lc.default
+    fact: is_defaulter
+    op: eq
+    value: false
+    text: {en: "Lender credit norm: not in default with any bank or financial institution", hi: "बैंक ऋण मानदंड: किसी बैंक या वित्तीय संस्था का डिफ़ॉल्टर नहीं"}
+    cite: {source: lender_norm, loc: "PMMY product page, eligibility"}
+  - text: {en: "The lender appraises the business plan and repayment capacity, and sets the interest rate", hi: "बैंक व्यवसाय योजना और चुकाने की क्षमता का आकलन कर ब्याज दर तय करता है"}
+    cite: {source: rbi_kfs_2024, loc: "Rate & charges disclosed in the KFS"}

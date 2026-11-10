@@ -1,0 +1,98 @@
+id: pmegp
+short: PMEGP
+name: {en: "Prime Minister's Employment Generation Programme (PMEGP)", hi: "प्रधानमंत्री रोज़गार सृजन कार्यक्रम (PMEGP)"}
+kind: subsidy_loan
+agency: {en: "KVIC, KVIB and District Industries Centre (DIC); loan from banks", hi: "केवीआईसी, केवीआईबी और ज़िला उद्योग केंद्र; ऋण बैंक से"}
+status: active
+status_note:
+  en: "Running in FY 2026-27 (margin money being released); the cabinet approval on record covers up to FY 2025-26, confirm with DIC."
+  hi: "वित्त वर्ष 2026-27 में चालू (मार्जिन मनी जारी हो रही है); रिकॉर्ड पर स्वीकृति 2025-26 तक की है, DIC से पुष्टि करें।"
+status_cite: [{source: pmegp_pib_oct_2026, loc: "FY 2026-27 operations (28 Oct 2026)"}, {source: pmegp_pib_2026, loc: "FY 2026-27 operations"}, {source: pmegp_status_2026, loc: "Oct 2026 report on margin-money release"}]
+apply_via: {name: PMEGP e-Portal (KVIC), url: "https://www.kviconline.gov.in/pmegpeportal/"}
+summary:
+  en: "Credit-linked capital subsidy (15–35% of project cost) for setting up NEW micro enterprises, up to ₹50 lakh manufacturing, ₹20 lakh service/business."
+  hi: "नई सूक्ष्म इकाई लगाने के लिए ऋण-संबद्ध पूंजी सब्सिडी (परियोजना लागत का 15–35%), विनिर्माण ₹50 लाख तक, सेवा/व्यवसाय ₹20 लाख तक।"
+criteria:
+  id: pmegp.all
+  all:
+    - id: pmegp.age
+      fact: age
+      op: gte
+      value: 18
+      text: {en: "Applicant is at least 18 years old", hi: "आवेदक की आयु कम से कम 18 वर्ष"}
+      cite: {source: kvic_pmegp, loc: "Eligibility conditions of beneficiaries, age"}
+    - id: pmegp.entity
+      fact: ownership_type
+      op: in
+      value: [individual, proprietorship, shg, society, cooperative, trust]
+      text: {en: "Individual, self-help group, registered society, production co-operative or charitable trust", hi: "व्यक्ति, स्वयं सहायता समूह, पंजीकृत सोसाइटी, उत्पादन सहकारी समिति या धर्मार्थ ट्रस्ट"}
+      cite: {source: kvic_pmegp, loc: "Eligibility conditions of beneficiaries, eligible entities"}
+    - id: pmegp.new
+      fact: is_new_unit
+      op: eq
+      value: true
+      text: {en: "First-time PMEGP is for NEW projects (existing PMEGP/REGP/MUDRA units: see 'PMEGP 2nd loan')", hi: "पहली बार का PMEGP नई परियोजनाओं के लिए (मौजूदा PMEGP/REGP/मुद्रा इकाइयाँ: 'PMEGP दूसरा ऋण' देखें)"}
+      cite: {source: kvic_pmegp, loc: "Eligibility conditions; only new projects sanctioned"}
+    - id: pmegp.cost_mfg
+      text: {en: "Manufacturing project cost up to ₹50 lakh", hi: "विनिर्माण परियोजना लागत ₹50 लाख तक"}
+      cite: {source: pib_pmegp_2025, loc: "Maximum project cost, manufacturing"}
+      implies:
+        if: {fact: sector, op: eq, value: manufacturing}
+        then: {fact: project_cost, op: lte, value: 5000000}
+    - id: pmegp.cost_svc
+      text: {en: "Service/business project cost up to ₹20 lakh", hi: "सेवा/व्यवसाय परियोजना लागत ₹20 लाख तक"}
+      cite: {source: pib_pmegp_2025, loc: "Maximum project cost, service/business"}
+      implies:
+        if: {fact: sector, op: in, value: [services, trading, allied_agri]}
+        then: {fact: project_cost, op: lte, value: 2000000}
+    - id: pmegp.edu_mfg
+      text: {en: "8th pass needed if manufacturing project cost exceeds ₹10 lakh", hi: "विनिर्माण परियोजना ₹10 लाख से अधिक हो तो 8वीं पास ज़रूरी"}
+      cite: {source: kvic_pmegp, loc: "Eligibility conditions, educational qualification"}
+      implies:
+        if:
+          all:
+            - {fact: sector, op: eq, value: manufacturing}
+            - {fact: project_cost, op: gt, value: 1000000}
+        then: {fact: education_rank, op: gte, value: 2}
+    - id: pmegp.edu_svc
+      text: {en: "8th pass needed if service/business project cost exceeds ₹5 lakh", hi: "सेवा/व्यवसाय परियोजना ₹5 लाख से अधिक हो तो 8वीं पास ज़रूरी"}
+      cite: {source: kvic_pmegp, loc: "Eligibility conditions, educational qualification"}
+      implies:
+        if:
+          all:
+            - {fact: sector, op: in, value: [services, trading, allied_agri]}
+            - {fact: project_cost, op: gt, value: 500000}
+        then: {fact: education_rank, op: gte, value: 2}
+    - id: pmegp.no_other_subsidy
+      fact: availed_other_govt_subsidy
+      op: eq
+      value: false
+      text: {en: "Unit has not received subsidy under another government scheme", hi: "इकाई को किसी अन्य सरकारी योजना से सब्सिडी नहीं मिली"}
+      cite: {source: kvic_pmegp, loc: "Eligibility conditions, units already availing govt subsidy not eligible"}
+    - id: pmegp.not_availed
+      fact: availed_pmegp
+      op: eq
+      value: false
+      text: {en: "Applicant has not already availed first-time PMEGP", hi: "आवेदक ने पहले PMEGP नहीं लिया है"}
+      cite: {source: kvic_pmegp, loc: "Eligibility conditions, one-time assistance"}
+    - id: pmegp.one_per_family
+      fact: family_member_availed_pmegp
+      op: eq
+      value: false
+      text: {en: "Only one person per family (self and spouse) can avail PMEGP", hi: "एक परिवार (स्वयं और पति/पत्नी) से केवल एक व्यक्ति PMEGP ले सकता है"}
+      cite: {source: kvic_pmegp, loc: "Eligibility conditions, one person per family"}
+    - id: pmegp.negative_list
+      fact: in_negative_list
+      op: eq
+      value: false
+      verified_by: {en: "the DIC / district task force", hi: "DIC / ज़िला टास्क फ़ोर्स"}
+      text: {en: "Activity is not on the PMEGP negative list (e.g. meat/slaughter, intoxicants, some plastic products, direct cultivation of plantation crops; local prohibitions also apply), self-declared until the DIC checks it against the current list", hi: "गतिविधि PMEGP निषेध सूची में नहीं (जैसे मांस/पशु-वध, नशीले पदार्थ, कुछ प्लास्टिक उत्पाद, बागान फसलों की सीधी खेती; स्थानीय प्रतिबंध भी लागू), DIC के मौजूदा सूची से जाँचने तक यह स्व-घोषित है"}
+      cite: {source: kvic_pmegp_2023, loc: "Negative list of activities (revised guidelines, as amended)"}
+lender_checks:
+  - text: {en: "The DIC / district task force checks the activity against the current negative list, a Saakh match on this point is provisional until then. The list has been relaxed over time (e.g. some farm-linked and animal-husbandry activities), so it is not hard-coded here", hi: "DIC / ज़िला टास्क फ़ोर्स गतिविधि को मौजूदा निषेध सूची से जाँचती है, तब तक साख का यह मिलान अस्थायी है। सूची में समय-समय पर ढील दी गई है (जैसे कुछ कृषि-संबद्ध और पशुपालन गतिविधियाँ), इसलिए इसे यहाँ स्थायी रूप से नहीं लिखा गया"}
+    cite: {source: rs_pmegp_negative_list_2024, loc: "Reply on relaxations to the PMEGP negative list"}
+caveats:
+  - id: pmegp.cv.exceptions
+    when: {fact: in_negative_list, op: eq, value: true}
+    text: {en: "The negative list has exceptions, e.g. serving non-veg food at a hotel or dhaba is allowed, and the plastic exclusion depends on bag thickness and food use. If your activity may be an exception, ask the DIC before giving up on PMEGP.", hi: "निषेध सूची में अपवाद हैं, जैसे होटल/ढाबे पर मांसाहारी भोजन परोसना अनुमत है, और प्लास्टिक का नियम बैग की मोटाई और भोजन-उपयोग पर निर्भर है। अगर आपकी गतिविधि अपवाद हो सकती है, तो PMEGP छोड़ने से पहले DIC से पूछें।"}
+    cite: {source: rs_pmegp_negative_list_2024, loc: "Reply on the negative list: hotels/dhabas; polythene carry bags"}

@@ -1,0 +1,318 @@
+# Source registry. Every eligibility criterion and every benefit in the scheme
+# knowledge base cites one of these sources by id plus a locator.
+#
+# verification:
+#   verified            – clause text was read on the official page on `checked`.
+#   official_unverified – official document identified; clause taken from
+#                         secondary summaries and awaiting maintainer check.
+#   secondary           – only non-official sources; the agent always tells the
+#                         user to confirm with the branch / agency.
+#
+# checked = date the source was last opened by the maintainers (YYYY-MM-DD).
+
+pmv_portal:
+  title: PM Vishwakarma, official portal (Eligibility Criteria, Eligible Trades, Scheme Benefits)
+  publisher: Ministry of MSME, Government of India
+  url: https://pmvishwakarma.gov.in/
+  verification: verified
+  checked: 2026-11-09
+
+pmv_faq:
+  title: PM Vishwakarma, Frequently Asked Questions
+  publisher: Ministry of MSME, Government of India
+  url: https://pmvishwakarma.gov.in/Home/FAQ
+  verification: verified
+  checked: 2026-11-09
+
+cgtmse_borrowers:
+  title: CGTMSE, Eligible Borrowers (FAQ)
+  publisher: Credit Guarantee Fund Trust for Micro and Small Enterprises
+  url: https://www.cgtmse.in/Home/VS/95
+  verification: verified
+  checked: 2026-11-09
+
+cgtmse_facilities:
+  title: CGTMSE, Credit Facilities & Parameters (FAQ)
+  publisher: Credit Guarantee Fund Trust for Micro and Small Enterprises
+  url: https://www.cgtmse.in/Home/VS/96
+  verification: verified
+  checked: 2026-11-09
+
+cgtmse_fee:
+  title: CGTMSE, Annual Guarantee Fee (Circular No. 251/2024-25 dated 18 Mar 2025)
+  publisher: Credit Guarantee Fund Trust for Micro and Small Enterprises
+  url: https://www.cgtmse.in/Home/VS/98
+  verification: verified
+  checked: 2026-11-09
+
+cgtmse_cover_guidelines:
+  title: Credit Guarantee Scheme, Scheme Guidelines (extent of guarantee cover)
+  publisher: Office of the DC (MSME), Ministry of MSME
+  url: https://dcmsme.gov.in/CLCS_TUS_Scheme/Credit_Guarantee_Scheme/Scheme_Guidelines.aspx
+  verification: official_unverified
+  checked: 2026-11-09
+  note: Coverage percentages are reported consistently by lenders; circular text could not be machine-read.
+
+sui_guidelines:
+  title: Stand-Up India, Scheme Guidelines
+  publisher: SIDBI / Department of Financial Services
+  url: https://standupmitra.in/Home/SchemeGuidelines
+  verification: verified
+  checked: 2026-11-09
+
+sui_status_2026:
+  title: Reported Lok Sabha statement (16 Mar 2026) that Stand-Up India's period ended Mar 2025 and is being redrafted
+  publisher: Secondary (news / scheme aggregators)
+  url: https://sarkariyojana.com/stand-up-india-loan-scheme/
+  verification: secondary
+  checked: 2026-11-09
+  note: Conflicts with the official portal, which still presents the scheme as live.
+
+pib_pmegp_2025:
+  title: PIB backgrounder on PMEGP (Feb 2025), project cost ceilings, subsidy and own-contribution table
+  publisher: Press Information Bureau, Government of India
+  url: https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/feb/doc202524496501.pdf
+  verification: official_unverified
+  checked: 2026-11-09
+
+kvic_pmegp:
+  title: PMEGP e-Portal & Operational Guidelines
+  publisher: Khadi and Village Industries Commission
+  url: https://www.kviconline.gov.in/pmegpeportal/
+  verification: official_unverified
+  checked: 2026-11-09
+  note: Portal unreachable from our crawler on 2026-11-09 (DNS failure); clauses from PIB and lender summaries.
+
+pmegp_status_2026:
+  title: PMEGP operating in FY 2026-27 (margin money released; approval on record only till FY 2025-26)
+  publisher: Secondary (news reports, Oct 2026)
+  url: https://www.entrepreneurindia.com/blog/en/news/promoting-self-employment-entrepreneurship-1000-crore-margin-money-subsidy-released-under-pmegp.61375
+  verification: secondary
+  checked: 2026-11-09
+
+pib_mudra_tarun_plus:
+  title: PIB, MUDRA loan limit raised to ₹20 lakh (Tarun Plus), Oct 2024
+  publisher: Press Information Bureau, Government of India
+  url: https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/oct/doc20241029426401.pdf
+  verification: official_unverified
+  checked: 2026-11-09
+
+mudra_portal:
+  title: Pradhan Mantri MUDRA Yojana, official portal (offerings, eligibility, CGFMU)
+  publisher: MUDRA Ltd / Department of Financial Services
+  url: https://www.mudra.org.in/
+  verification: official_unverified
+  checked: 2026-11-09
+  note: TLS certificate error on 2026-11-09; clauses from PIB and bank product pages.
+
+svanidhi_portal:
+  title: PM SVANidhi, official portal (15k / 25k / 50k loans, LoR, credit card)
+  publisher: Ministry of Housing and Urban Affairs
+  url: https://pmsvanidhi.mohua.gov.in/
+  verification: verified
+  checked: 2026-11-09
+
+svanidhi_cabinet_2025:
+  title: Cabinet approves restructuring & extension of PM SVANidhi till 31 Mar 2030 (27 Aug 2025)
+  publisher: All India Radio News (Prasar Bharati)
+  url: https://newsonair.gov.in/union-cabinet-approves-restructuring-of-pm-svanidhi-scheme
+  verification: official_unverified
+  checked: 2026-11-09
+
+dahd_kcc:
+  title: Kisan Credit Card for Animal Husbandry & Dairying, leaflet
+  publisher: Department of Animal Husbandry & Dairying
+  url: https://dahd.gov.in/sites/default/files/2023-07/KCC-Leaflet-E.pdf
+  verification: official_unverified
+  checked: 2026-11-09
+
+rbi_miss_2026:
+  title: RBI, Modified Interest Subvention Scheme for short-term loans via KCC (FY 2025-26)
+  publisher: Reserve Bank of India
+  url: https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13270
+  verification: official_unverified
+  checked: 2026-11-09
+
+rbi_collateral_free_agri:
+  title: RBI circular (6 Dec 2024), collateral-free agricultural loans raised to ₹2 lakh from 1 Jan 2025
+  publisher: Secondary report of RBI circular
+  url: https://www.indiancooperative.com/co-op-news-snippets/rs-2-lakh-collateral-free-kcc-loans-mos/
+  verification: secondary
+  checked: 2026-11-09
+
+rbi_nrlm_mc:
+  title: RBI Master Circular RBI/2025-26/02, DAY-NRLM (1 Apr 2025)
+  publisher: Reserve Bank of India
+  url: https://www.rbi.org.in/Scripts/BS_ViewMasCirculardetails.aspx?id=12806
+  verification: verified
+  checked: 2026-11-09
+  note: Paras 2.1, 2.2, 7.3.6 and Annex II Part I read verbatim. Interest terms are stated for FY 2025-26; FY 2026-27 terms not yet verified.
+
+msmed_act:
+  title: Micro, Small and Medium Enterprises Development Act, 2006 (Sections 15–18)
+  publisher: India Code, Ministry of Law & Justice
+  url: https://www.indiacode.nic.in/handle/123456789/2013
+  verification: official_unverified
+  checked: 2026-11-09
+
+samadhaan_portal:
+  title: MSME Samadhaan, delayed payment monitoring system
+  publisher: Ministry of MSME
+  url: https://samadhaan.msme.gov.in/
+  verification: official_unverified
+  checked: 2026-11-09
+
+udyam_portal:
+  title: Udyam Registration portal (free, Aadhaar-based; MSME classification)
+  publisher: Ministry of MSME
+  url: https://udyamregistration.gov.in/
+  verification: official_unverified
+  checked: 2026-11-09
+
+rbi_kfs_2024:
+  title: RBI/2024-25/18 DOR.STR.REC.13/13.03.00/2024-25, Key Facts Statement for Loans & Advances (15 Apr 2024)
+  publisher: Reserve Bank of India
+  url: https://website.rbi.org.in/web/rbi/-/notifications/key-facts-statement-kfs-for-loans-advances
+  verification: official_unverified
+  checked: 2026-11-09
+
+rebit_aa:
+  title: ReBIT Account Aggregator API specifications (consent artefact, FI types, purpose codes)
+  publisher: Reserve Bank Information Technology Pvt Ltd
+  url: https://api.rebit.org.in/
+  verification: official_unverified
+  checked: 2026-11-09
+
+dpdp_act:
+  title: Digital Personal Data Protection Act, 2023
+  publisher: Ministry of Electronics & IT
+  url: https://www.meity.gov.in/data-protection-framework
+  verification: official_unverified
+  checked: 2026-11-09
+
+lender_norm:
+  title: Standard lender credit policy, borrower must not be in default with any bank/FI
+  publisher: Secondary (bank product pages)
+  url: https://sbi.bank.in/web/business/sme/sme-government-schemes/pmmy
+  verification: secondary
+  checked: 2026-11-09
+
+cgtmse_scheme_doc:
+  title: CGTMSE, Credit Guarantee Scheme (CGS-I) document, updated 1 Jan 2025 (Member Lending Institutions, eligible facilities, cover)
+  publisher: Credit Guarantee Fund Trust for Micro and Small Enterprises
+  url: https://www.cgtmse.in/Default/ViewFile/?id=1736356443701_CGTMSE+-+Scheme+Document+CGS+I_updated+as+on+Jan+01+2025.pdf&path=Page
+  verification: official_unverified
+  checked: 2026-11-09
+  note: Cover is obtained by an eligible Member Lending Institution after its own appraisal; it is not a borrower entitlement. PDF was not machine-readable from our crawler.
+
+pmegp_upgrade:
+  title: 2nd loan for upgradation of existing PMEGP/REGP/MUDRA units
+  publisher: Invest India (Government of India), scheme summary
+  url: https://investindia.gov.in/schemes-msmes-india/2nd-loan-gradation-existing-pmegpmudra-units
+  verification: official_unverified
+  checked: 2026-11-09
+  note: Figures (Rs 1 crore manufacturing / Rs 25 lakh service, 15% subsidy, 20% NER & hill) match Vikaspedia and lender pages; KVIC guideline PDF unreachable (DNS) on 2026-11-09.
+
+pmegp_pib_2026:
+  title: PIB release on PMEGP operations in FY 2026-27
+  publisher: Press Information Bureau, Government of India
+  url: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2238242&lang=1&reg=1
+  verification: official_unverified
+  checked: 2026-11-09
+  note: PIB blocks automated retrieval (HTTP 403); identified via external review, not machine-verified.
+
+sui_pib_extension:
+  title: PIB, Stand-Up India scheme extended up to the year 2025
+  publisher: Press Information Bureau, Government of India
+  url: https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=1737320
+  verification: official_unverified
+  checked: 2026-11-09
+
+sui_revamp_secondary:
+  title: Stand-Up India concluded March 2025; being redesigned with NITI Aayog (successor not yet operational)
+  publisher: Secondary (IBEF summary)
+  url: https://www.ibef.org/government-schemes/stand-up-india
+  verification: secondary
+  checked: 2026-11-09
+
+msme_trade_order_2021:
+  title: Ministry of MSME order (1 Sep 2021), retail & wholesale trade MSMEs get priority-sector-lending benefits only; delayed-payment provisions excluded
+  publisher: Secondary report of Ministry of MSME order
+  url: https://knnindia.co.in/news/newsdetails/msme/traders-not-eligible-to-access-facilitation-councils-for-delayed-payment-provisions-under-msmed-act
+  verification: secondary
+  checked: 2026-11-09
+
+msme_classification_2025:
+  title: Revised MSME classification w.e.f. 1 Apr 2025 (micro Rs 2.5 cr / 10 cr; small 25 / 100; medium 125 / 500, investment / turnover)
+  publisher: Ministry of MSME (Udyam portal)
+  url: https://udyamregistration.gov.in/
+  verification: official_unverified
+  checked: 2026-11-09
+
+kvic_negative_list:
+  title: PMEGP, negative list of activities (KVIC notification of 21 May 2018, as amended)
+  publisher: Khadi and Village Industries Commission
+  url: https://www.kviconline.gov.in/pmegpeportal/dashboard/notification/20180521.pdf
+  verification: official_unverified
+  checked: 2026-11-10
+  note: KVIC portal unreachable from our crawler; Saakh clears only activities known not to be listed and asks a declaration otherwise. The DIC confirms.
+
+rs_pmegp_negative_list_2024:
+  title: Rajya Sabha unstarred question (5 Aug 2024), PMEGP negative-list relaxations
+  publisher: Rajya Sabha (Ministry of MSME reply)
+  url: https://rsdebate.nic.in/bitstream/123456789/750459/1/PQ_265_05082024_U1542_p345_p346.pdf
+  verification: official_unverified
+  checked: 2026-11-10
+  note: Read via search excerpts only, says farm-linked activities and some animal husbandry (dairy, poultry, aquaculture, sericulture) were relaxed. Not machine-read in full; the current KVIC list governs.
+
+pmegp_2nd_loan_guidelines:
+  title: Guidelines for 2nd loan for upgradation of existing PMEGP/REGP/MUDRA units (Annexure II, Ministry of MSME)
+  publisher: Ministry of MSME / KVIC (copy hosted by SVNIT Unnat Bharat cell); cross-checked with Vikaspedia
+  url: https://www.svnit.ac.in/Unnat_Bharat/PI/pdf/Livelihood%20&%20Entreprenurship/Schemes%20by%20Government%20of%20India/PMEGP%20Pradhan%20Mantri%20Employment%20Generation%20Programme/Annexure%20II%20final-guidlines-for-2nd-loan.pdf
+  verification: secondary
+  checked: 2026-11-10
+  note: KVIC's revised guideline PDF is unreachable from our environment (DNS). Search excerpts agree on timely repayment, margin money adjusted after the 3-year lock-in, and the Rs 1 crore / Rs 25 lakh caps; a fixed 3-year profit rule appears only in non-official summaries, so it is not applied.
+pmegp_pib_oct_2026:
+  title: PIB release of 28 Oct 2026 on PMEGP in FY 2026-27
+  publisher: Press Information Bureau, Government of India
+  url: https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2329819&lang=2&reg=48
+  verification: official_unverified
+  checked: 2026-11-10
+  note: Primary source cited by an external reviewer; PIB refuses automated retrieval (HTTP 403), so not machine-read by us.
+dfs_standup:
+  title: Stand-Up India Scheme (SUPI), Department of Financial Services
+  publisher: Department of Financial Services, Ministry of Finance
+  url: https://financialservices.gov.in/index.php/stand-india-scheme-supi
+  verification: official_unverified
+  checked: 2026-11-10
+  note: Official page; our fetch failed (TLS hostname mismatch on www.). Search excerpts show progress "as on 28.02.2025"; scheme period to 31 Mar 2025, successor not notified.
+
+kvic_pmegp_2023:
+  title: PMEGP, revised scheme guidelines (KVIC, December 2023)
+  publisher: Khadi and Village Industries Commission
+  url: https://www.kviconline.gov.in/pmegpeportal/dashboard/notification/Revised_PMEGP_Scheme_Guidelines_07122023_compressed.pdf
+  verification: official_unverified
+  checked: 2026-11-10
+  note: The governing document. Our crawler could not open it (DNS failure on kviconline.gov.in, retried 2026-11-10); the clauses Saakh uses were cross-checked against a Rajya Sabha reply (Aug 2024), state KVIB pages and the Ministry's 2nd-loan guidelines. Where they differ, Saakh marks the result provisional or shows a caveat.
+
+pmegp_portal:
+  title: PMEGP portal (Ministry of MSME), eligibility for up-gradation of existing PMEGP/REGP/MUDRA units
+  publisher: Ministry of MSME / KVIC
+  url: https://common-pmegp.msme.gov.in/Home/HomePage
+  verification: verified
+  checked: 2026-11-10
+  note: Read directly. States that the unit "should have been making profit for the last three years", that the margin-money claim must be adjusted and the first loan repaid in the stipulated time, and that Udyam registration is mandatory.
+rs_pmegp_covid:
+  title: Rajya Sabha replies (5 Feb 2024; 3 Feb 2025) on PMEGP second loans, exclusion of COVID years from profitability
+  publisher: Rajya Sabha (Ministry of MSME replies)
+  url: https://rsdebate.nic.in/bitstream/123456789/758105/1/PQ_267_03022025_U107_p356_p358.pdf
+  verification: official_unverified
+  checked: 2026-11-10
+  note: Read via search excerpts ("COVID years i.e., FY2020-21 and FY2021-22 have been exempted while considering profitability"); not machine-read in full.
+kvic_2nd_loan_memo:
+  title: PMEGP second-loan guidelines, KVIC memorandum of 7 Dec 2023
+  publisher: Khadi and Village Industries Commission
+  url: https://kviconline.gov.in/pmegpeportal/dashboard/notification/PMEGP_Scheme_Guidelines_07122023_Second_Loan.pdf
+  verification: official_unverified
+  checked: 2026-11-10
+  note: Cited by an external reviewer as describing the three-year test with the COVID-year exclusion; not readable from our environment (DNS failure on kviconline.gov.in).

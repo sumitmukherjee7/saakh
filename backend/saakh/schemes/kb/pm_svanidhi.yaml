@@ -1,0 +1,33 @@
+id: pm_svanidhi
+short: PM SVANidhi
+name: {en: "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)", hi: "पीएम स्ट्रीट वेंडर आत्मनिर्भर निधि (पीएम स्वनिधि)"}
+kind: loan
+agency: {en: "Ministry of Housing & Urban Affairs; loans via banks, NBFCs, MFIs", hi: "आवास और शहरी कार्य मंत्रालय; ऋण बैंक/एनबीएफसी/एमएफआई से"}
+status: active
+status_cite: [{source: svanidhi_cabinet_2025, loc: "Lending period extended to 31 Mar 2030"}]
+valid_to: 2030-03-31
+apply_via: {name: PM SVANidhi portal, url: "https://pmsvanidhi.mohua.gov.in/"}
+summary:
+  en: "Working-capital loans for street vendors in tranches of ₹15,000, ₹25,000 and ₹50,000, then a UPI-linked credit card."
+  hi: "रेहड़ी-पटरी विक्रेताओं के लिए ₹15,000, ₹25,000 और ₹50,000 की किस्तों में कार्यशील पूंजी ऋण, फिर UPI-जुड़ा क्रेडिट कार्ड।"
+criteria:
+  id: svn.all
+  all:
+    - id: svn.vendor
+      fact: is_street_vendor
+      op: eq
+      value: true
+      text: {en: "Applicant is a street vendor", hi: "आवेदक रेहड़ी-पटरी विक्रेता है"}
+      cite: {source: svanidhi_portal, loc: "Home, scheme for street vendors"}
+    - id: svn.lor
+      fact: has_vending_certificate_or_lor
+      op: eq
+      value: true
+      text: {en: "Has a vending certificate/ID or a Letter of Recommendation (LoR) from the urban local body", hi: "नगर निकाय का वेंडिंग प्रमाणपत्र/पहचान पत्र या अनुशंसा पत्र (LoR) है"}
+      cite: {source: svanidhi_portal, loc: "Home, 'Apply LoR cum Loan'", verification: official_unverified}
+    - id: svn.urban
+      fact: area_type
+      op: eq
+      value: urban
+      text: {en: "Vends in a statutory town (being extended to census towns and peri-urban areas)", hi: "वैधानिक शहर में विक्रय (जनगणना शहरों और उपनगरीय क्षेत्रों तक विस्तार हो रहा है)"}
+      cite: {source: svanidhi_cabinet_2025, loc: "Coverage expansion beyond statutory towns"}

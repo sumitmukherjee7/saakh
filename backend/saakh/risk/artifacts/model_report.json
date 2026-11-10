@@ -1,0 +1,1200 @@
+{
+ "version": "saakh-scorecard-2026-11-09-s7",
+ "trained_on": "2026-11-09",
+ "train_seconds": 44.1,
+ "target": "SIMULATED binary default label drawn from a hand-specified generator (risk/synth.py), not an observed 12-month 90+ DPD outcome. Outputs are a simulated risk estimate, not a validated probability of default.",
+ "evaluation_protocol": "train 50% / validation 15% (candidate-feature and proxy gates) / calibration 15% (method selection by 2-fold cross-fitting) / test 20% (final metrics, computed once). Random split from one generator: no temporal or external validation is possible on synthetic data.",
+ "data": {
+  "n": 30000,
+  "train": 15000,
+  "validation": 4500,
+  "calibration": 4500,
+  "test": 6000,
+  "base_default_rate": 0.081,
+  "synthetic": true,
+  "composition": {
+   "female": 0.421,
+   "rural": 0.55,
+   "thin_file": 0.232
+  }
+ },
+ "features": [
+  {
+   "name": "inflow_cv",
+   "label": {
+    "en": "Income stability (month-to-month swings)",
+    "hi": "आय की स्थिरता (महीने-दर-महीने उतार-चढ़ाव)"
+   },
+   "iv": 0.2081,
+   "points_range": [
+    38.9,
+    72.69
+   ]
+  },
+  {
+   "name": "inflow_trend",
+   "label": {
+    "en": "Sales growth over the year",
+    "hi": "साल भर में बिक्री वृद्धि"
+   },
+   "iv": 0.2203,
+   "points_range": [
+    38.36,
+    71.78
+   ]
+  },
+  {
+   "name": "min_to_median",
+   "label": {
+    "en": "Lean-month income vs a normal month",
+    "hi": "कमज़ोर महीने की आय बनाम सामान्य महीना"
+   },
+   "iv": 0.1026,
+   "points_range": [
+    53.08,
+    55.85
+   ]
+  },
+  {
+   "name": "margin_ratio",
+   "label": {
+    "en": "Money left after business & household costs",
+    "hi": "व्यवसाय और घर के खर्च के बाद बची राशि"
+   },
+   "iv": 0.3158,
+   "points_range": [
+    38.68,
+    81.25
+   ]
+  },
+  {
+   "name": "debt_service_ratio",
+   "label": {
+    "en": "Existing repayments as share of income",
+    "hi": "आय में मौजूदा किस्तों का हिस्सा"
+   },
+   "iv": 0.1197,
+   "points_range": [
+    46.93,
+    58.67
+   ]
+  },
+  {
+   "name": "informal_share",
+   "label": {
+    "en": "Repayments to moneylenders",
+    "hi": "साहूकार को भुगतान"
+   },
+   "iv": 0.0859,
+   "points_range": [
+    38.72,
+    58.24
+   ]
+  },
+  {
+   "name": "buffer_days",
+   "label": {
+    "en": "Cash buffer (days of expenses in the account)",
+    "hi": "नकद बफ़र (खाते में कितने दिनों का खर्च)"
+   },
+   "iv": 0.32,
+   "points_range": [
+    28.17,
+    85.98
+   ]
+  },
+  {
+   "name": "bounces_12m",
+   "label": {
+    "en": "EMI / cheque bounces in 12 months",
+    "hi": "12 महीनों में EMI / चेक बाउंस"
+   },
+   "iv": 0.2615,
+   "points_range": [
+    33.45,
+    63.57
+   ]
+  },
+  {
+   "name": "neg_months_share",
+   "label": {
+    "en": "Months where spending exceeded income",
+    "hi": "महीने जब खर्च आय से अधिक था"
+   },
+   "iv": 0.3771,
+   "points_range": [
+    45.09,
+    69.72
+   ]
+  },
+  {
+   "name": "proposed_dsr",
+   "label": {
+    "en": "New EMI as a share of monthly income",
+    "hi": "मासिक आय में नई EMI का हिस्सा"
+   },
+   "iv": 0.0327,
+   "points_range": [
+    37.45,
+    71.49
+   ]
+  }
+ ],
+ "metrics": {
+  "auc": 0.7362,
+  "gini": 0.4723,
+  "ks": 0.3447,
+  "brier": 0.073,
+  "pr_auc": 0.1988,
+  "log_loss": 0.2626,
+  "ci95": {
+   "auc": [
+    0.7144,
+    0.7588
+   ],
+   "brier": [
+    0.0673,
+    0.0782
+   ],
+   "ece": [
+    0.007,
+    0.016
+   ],
+   "pr_auc": [
+    0.1773,
+    0.228
+   ]
+  },
+  "ece_calibrated": 0.0061,
+  "ece_uncalibrated": 0.0061,
+  "ece_isotonic": 0.0094,
+  "calibration_choice": {
+   "method": "identity",
+   "cv_ece": {
+    "identity": 0.0107,
+    "platt": 0.0136
+   }
+  },
+  "auc_gbm_challenger": 0.7352,
+  "interpretability_cost_auc": -0.001,
+  "band_distribution": {
+   "A": 1430,
+   "B": 1711,
+   "C": 1271,
+   "D": 1005,
+   "E": 583
+  }
+ },
+ "reliability": {
+  "overall": [
+   {
+    "pred": 0.0144,
+    "obs": 0.0083,
+    "n": 600
+   },
+   {
+    "pred": 0.0228,
+    "obs": 0.025,
+    "n": 600
+   },
+   {
+    "pred": 0.031,
+    "obs": 0.03,
+    "n": 600
+   },
+   {
+    "pred": 0.0402,
+    "obs": 0.0417,
+    "n": 600
+   },
+   {
+    "pred": 0.0508,
+    "obs": 0.0767,
+    "n": 600
+   },
+   {
+    "pred": 0.064,
+    "obs": 0.0667,
+    "n": 600
+   },
+   {
+    "pred": 0.081,
+    "obs": 0.0883,
+    "n": 600
+   },
+   {
+    "pred": 0.1049,
+    "obs": 0.105,
+    "n": 600
+   },
+   {
+    "pred": 0.1447,
+    "obs": 0.1467,
+    "n": 600
+   },
+   {
+    "pred": 0.248,
+    "obs": 0.26,
+    "n": 600
+   }
+  ],
+  "uncalibrated": [
+   {
+    "pred": 0.0144,
+    "obs": 0.0083,
+    "n": 600
+   },
+   {
+    "pred": 0.0228,
+    "obs": 0.025,
+    "n": 600
+   },
+   {
+    "pred": 0.031,
+    "obs": 0.03,
+    "n": 600
+   },
+   {
+    "pred": 0.0402,
+    "obs": 0.0417,
+    "n": 600
+   },
+   {
+    "pred": 0.0508,
+    "obs": 0.0767,
+    "n": 600
+   },
+   {
+    "pred": 0.064,
+    "obs": 0.0667,
+    "n": 600
+   },
+   {
+    "pred": 0.081,
+    "obs": 0.0883,
+    "n": 600
+   },
+   {
+    "pred": 0.1049,
+    "obs": 0.105,
+    "n": 600
+   },
+   {
+    "pred": 0.1447,
+    "obs": 0.1467,
+    "n": 600
+   },
+   {
+    "pred": 0.248,
+    "obs": 0.26,
+    "n": 600
+   }
+  ],
+  "by_group": {
+   "female": [
+    {
+     "pred": 0.016,
+     "obs": 0.0129,
+     "n": 311
+    },
+    {
+     "pred": 0.0261,
+     "obs": 0.0161,
+     "n": 310
+    },
+    {
+     "pred": 0.0369,
+     "obs": 0.0418,
+     "n": 311
+    },
+    {
+     "pred": 0.0503,
+     "obs": 0.0452,
+     "n": 310
+    },
+    {
+     "pred": 0.0669,
+     "obs": 0.0707,
+     "n": 311
+    },
+    {
+     "pred": 0.0909,
+     "obs": 0.0968,
+     "n": 310
+    },
+    {
+     "pred": 0.1281,
+     "obs": 0.1158,
+     "n": 311
+    },
+    {
+     "pred": 0.2318,
+     "obs": 0.2412,
+     "n": 311
+    }
+   ],
+   "male": [
+    {
+     "pred": 0.0152,
+     "obs": 0.0136,
+     "n": 440
+    },
+    {
+     "pred": 0.0256,
+     "obs": 0.0251,
+     "n": 439
+    },
+    {
+     "pred": 0.0364,
+     "obs": 0.0433,
+     "n": 439
+    },
+    {
+     "pred": 0.0488,
+     "obs": 0.082,
+     "n": 439
+    },
+    {
+     "pred": 0.0654,
+     "obs": 0.0682,
+     "n": 440
+    },
+    {
+     "pred": 0.0877,
+     "obs": 0.0911,
+     "n": 439
+    },
+    {
+     "pred": 0.1265,
+     "obs": 0.1481,
+     "n": 439
+    },
+    {
+     "pred": 0.2317,
+     "obs": 0.2341,
+     "n": 440
+    }
+   ],
+   "rural": [
+    {
+     "pred": 0.0155,
+     "obs": 0.0146,
+     "n": 411
+    },
+    {
+     "pred": 0.0258,
+     "obs": 0.0244,
+     "n": 410
+    },
+    {
+     "pred": 0.0368,
+     "obs": 0.0535,
+     "n": 411
+    },
+    {
+     "pred": 0.0498,
+     "obs": 0.0732,
+     "n": 410
+    },
+    {
+     "pred": 0.066,
+     "obs": 0.0585,
+     "n": 410
+    },
+    {
+     "pred": 0.0887,
+     "obs": 0.1022,
+     "n": 411
+    },
+    {
+     "pred": 0.1273,
+     "obs": 0.1244,
+     "n": 410
+    },
+    {
+     "pred": 0.2361,
+     "obs": 0.2238,
+     "n": 411
+    }
+   ],
+   "urban": [
+    {
+     "pred": 0.0156,
+     "obs": 0.0118,
+     "n": 340
+    },
+    {
+     "pred": 0.0259,
+     "obs": 0.0206,
+     "n": 339
+    },
+    {
+     "pred": 0.0365,
+     "obs": 0.0324,
+     "n": 340
+    },
+    {
+     "pred": 0.049,
+     "obs": 0.056,
+     "n": 339
+    },
+    {
+     "pred": 0.0661,
+     "obs": 0.0796,
+     "n": 339
+    },
+    {
+     "pred": 0.0893,
+     "obs": 0.0853,
+     "n": 340
+    },
+    {
+     "pred": 0.1272,
+     "obs": 0.1445,
+     "n": 339
+    },
+    {
+     "pred": 0.2264,
+     "obs": 0.2529,
+     "n": 340
+    }
+   ]
+  }
+ },
+ "fairness": {
+  "gates": {
+   "air_min": 0.8,
+   "eod_max": 0.05,
+   "cal_gap_max": 0.02
+  },
+  "scope": "Gated pairs: female vs male, rural vs urban, rural_female vs urban_male, social_sc vs social_general, social_st vs social_general, social_obc vs social_general, zone_west vs zone_northeast. Synthetic population where true risk is group-neutral by construction, favourable results partly follow from that design; real-data subgroup analysis is required before any claim.",
+  "passed": false,
+  "messages": [
+   "social_st_vs_social_general: |EOD| 0.0733 > 0.05"
+  ],
+  "replication": {
+   "fresh_draw_n": 20000,
+   "seed": 1007,
+   "pairs": {
+    "social_st_vs_social_general": {
+     "air": 0.981,
+     "eod": -0.0185,
+     "cal_gap_max": 0.0048,
+     "n": [
+      2067,
+      5909
+     ]
+    }
+   }
+  },
+  "release_decision": "BLOCKED, a fairness gate failed on the held-out test split. The rule fails closed: on real lender data this model would not be deployed until the gap is investigated. Here it is used for demonstration only.",
+  "groups": {
+   "female": {
+    "n": 2485,
+    "default_rate": 0.0801,
+    "mean_pd": 0.0809,
+    "cal_gap": 0.0008,
+    "ece": 0.006,
+    "auc": 0.7476,
+    "approval_rate": 0.7288,
+    "good_approval_rate": 0.7563,
+    "default_rate_approved": 0.0453
+   },
+   "male": {
+    "n": 3515,
+    "default_rate": 0.0882,
+    "mean_pd": 0.0797,
+    "cal_gap": -0.0085,
+    "ece": 0.0085,
+    "auc": 0.7293,
+    "approval_rate": 0.74,
+    "good_approval_rate": 0.7685,
+    "default_rate_approved": 0.0531
+   },
+   "rural": {
+    "n": 3284,
+    "default_rate": 0.0843,
+    "mean_pd": 0.0808,
+    "cal_gap": -0.0036,
+    "ece": 0.0079,
+    "auc": 0.7163,
+    "approval_rate": 0.7357,
+    "good_approval_rate": 0.7609,
+    "default_rate_approved": 0.053
+   },
+   "urban": {
+    "n": 2716,
+    "default_rate": 0.0854,
+    "mean_pd": 0.0795,
+    "cal_gap": -0.0059,
+    "ece": 0.0125,
+    "auc": 0.7598,
+    "approval_rate": 0.7349,
+    "good_approval_rate": 0.7665,
+    "default_rate_approved": 0.0461
+   },
+   "rural_female": {
+    "n": 1349,
+    "default_rate": 0.0823,
+    "mean_pd": 0.0817,
+    "cal_gap": -0.0005,
+    "ece": 0.0045,
+    "auc": 0.7325,
+    "approval_rate": 0.725,
+    "good_approval_rate": 0.7512,
+    "default_rate_approved": 0.0491
+   },
+   "urban_male": {
+    "n": 1580,
+    "default_rate": 0.0911,
+    "mean_pd": 0.0792,
+    "cal_gap": -0.012,
+    "ece": 0.0171,
+    "auc": 0.7567,
+    "approval_rate": 0.7361,
+    "good_approval_rate": 0.7695,
+    "default_rate_approved": 0.0499
+   },
+   "zone_north": {
+    "n": 1555,
+    "default_rate": 0.0842,
+    "mean_pd": 0.077,
+    "cal_gap": -0.0072,
+    "ece": 0.0134,
+    "auc": 0.7594,
+    "approval_rate": 0.7543,
+    "good_approval_rate": 0.7837,
+    "default_rate_approved": 0.0486
+   },
+   "zone_south": {
+    "n": 1166,
+    "default_rate": 0.084,
+    "mean_pd": 0.0811,
+    "cal_gap": -0.003,
+    "ece": 0.0137,
+    "auc": 0.7494,
+    "approval_rate": 0.729,
+    "good_approval_rate": 0.7612,
+    "default_rate_approved": 0.0435
+   },
+   "zone_east": {
+    "n": 1008,
+    "default_rate": 0.0913,
+    "mean_pd": 0.0809,
+    "cal_gap": -0.0104,
+    "ece": 0.016,
+    "auc": 0.7257,
+    "approval_rate": 0.7252,
+    "good_approval_rate": 0.7533,
+    "default_rate_approved": 0.0561
+   },
+   "zone_west": {
+    "n": 1113,
+    "default_rate": 0.0782,
+    "mean_pd": 0.0839,
+    "cal_gap": 0.0057,
+    "ece": 0.019,
+    "auc": 0.6975,
+    "approval_rate": 0.7152,
+    "good_approval_rate": 0.7368,
+    "default_rate_approved": 0.0503
+   },
+   "zone_central": {
+    "n": 785,
+    "default_rate": 0.0892,
+    "mean_pd": 0.079,
+    "cal_gap": -0.0101,
+    "ece": 0.0124,
+    "auc": 0.7388,
+    "approval_rate": 0.7389,
+    "good_approval_rate": 0.7664,
+    "default_rate_approved": 0.0552
+   },
+   "zone_northeast": {
+    "n": 373,
+    "default_rate": 0.0831,
+    "mean_pd": 0.08,
+    "cal_gap": -0.0031,
+    "ece": 0.0064,
+    "auc": 0.7375,
+    "approval_rate": 0.756,
+    "good_approval_rate": 0.7865,
+    "default_rate_approved": 0.0461
+   },
+   "social_general": {
+    "n": 1768,
+    "default_rate": 0.0769,
+    "mean_pd": 0.0793,
+    "cal_gap": 0.0023,
+    "ece": 0.0032,
+    "auc": 0.7471,
+    "approval_rate": 0.7472,
+    "good_approval_rate": 0.7751,
+    "default_rate_approved": 0.0424
+   },
+   "social_obc": {
+    "n": 2605,
+    "default_rate": 0.0917,
+    "mean_pd": 0.0809,
+    "cal_gap": -0.0109,
+    "ece": 0.0137,
+    "auc": 0.7424,
+    "approval_rate": 0.7309,
+    "good_approval_rate": 0.762,
+    "default_rate_approved": 0.053
+   },
+   "social_sc": {
+    "n": 1078,
+    "default_rate": 0.0816,
+    "mean_pd": 0.0788,
+    "cal_gap": -0.0028,
+    "ece": 0.015,
+    "auc": 0.7372,
+    "approval_rate": 0.7514,
+    "good_approval_rate": 0.7788,
+    "default_rate_approved": 0.0481
+   },
+   "social_st": {
+    "n": 549,
+    "default_rate": 0.0838,
+    "mean_pd": 0.0826,
+    "cal_gap": -0.0012,
+    "ece": 0.018,
+    "auc": 0.6673,
+    "approval_rate": 0.6867,
+    "good_approval_rate": 0.7018,
+    "default_rate_approved": 0.0637
+   }
+  },
+  "summary": {
+   "female_vs_male": {
+    "air": 0.985,
+    "eod": -0.0122,
+    "cal_gap_max": 0.0085,
+    "air_ci95": [
+     0.953,
+     0.999
+    ],
+    "eod_ci95": [
+     -0.036,
+     0.0095
+    ]
+   },
+   "rural_vs_urban": {
+    "air": 0.999,
+    "eod": -0.0056,
+    "cal_gap_max": 0.0059,
+    "air_ci95": [
+     0.9679,
+     0.999
+    ],
+    "eod_ci95": [
+     -0.0247,
+     0.0187
+    ]
+   },
+   "rural_female_vs_urban_male": {
+    "air": 0.985,
+    "eod": -0.0183,
+    "cal_gap_max": 0.012,
+    "air_ci95": [
+     0.9439,
+     0.998
+    ],
+    "eod_ci95": [
+     -0.0506,
+     0.0168
+    ]
+   },
+   "social_sc_vs_social_general": {
+    "air": 0.994,
+    "eod": 0.0037,
+    "cal_gap_max": 0.0028,
+    "air_ci95": [
+     0.9489,
+     0.999
+    ],
+    "eod_ci95": [
+     -0.0331,
+     0.0338
+    ]
+   },
+   "social_st_vs_social_general": {
+    "air": 0.919,
+    "eod": -0.0733,
+    "cal_gap_max": 0.0023,
+    "air_ci95": [
+     0.8548,
+     0.9771
+    ],
+    "eod_ci95": [
+     -0.1191,
+     -0.0342
+    ]
+   },
+   "social_obc_vs_social_general": {
+    "air": 0.978,
+    "eod": -0.0131,
+    "cal_gap_max": 0.0109,
+    "air_ci95": [
+     0.9459,
+     0.998
+    ],
+    "eod_ci95": [
+     -0.0369,
+     0.0093
+    ]
+   },
+   "zone_west_vs_zone_northeast": {
+    "air": 0.946,
+    "eod": -0.0497,
+    "cal_gap_max": 0.0057,
+    "air_ci95": [
+     0.8829,
+     0.994
+    ],
+    "eod_ci95": [
+     -0.1037,
+     -0.003
+    ]
+   }
+  },
+  "traditional_policy": {
+   "rule": "ITR filed AND collateral AND ≥2 years vintage AND no bounces",
+   "groups": {
+    "female": {
+     "n": 2485,
+     "default_rate": 0.0801,
+     "mean_pd": 0.0809,
+     "cal_gap": 0.0008,
+     "ece": 0.006,
+     "auc": 0.7476,
+     "approval_rate": 0.0169,
+     "good_approval_rate": 0.0175,
+     "default_rate_approved": 0.0476
+    },
+    "male": {
+     "n": 3515,
+     "default_rate": 0.0882,
+     "mean_pd": 0.0797,
+     "cal_gap": -0.0085,
+     "ece": 0.0085,
+     "auc": 0.7293,
+     "approval_rate": 0.0902,
+     "good_approval_rate": 0.0914,
+     "default_rate_approved": 0.0757
+    },
+    "rural": {
+     "n": 3284,
+     "default_rate": 0.0843,
+     "mean_pd": 0.0808,
+     "cal_gap": -0.0036,
+     "ece": 0.0079,
+     "auc": 0.7163,
+     "approval_rate": 0.0512,
+     "good_approval_rate": 0.0525,
+     "default_rate_approved": 0.0595
+    },
+    "urban": {
+     "n": 2716,
+     "default_rate": 0.0854,
+     "mean_pd": 0.0795,
+     "cal_gap": -0.0059,
+     "ece": 0.0125,
+     "auc": 0.7598,
+     "approval_rate": 0.0703,
+     "good_approval_rate": 0.0705,
+     "default_rate_approved": 0.0838
+    },
+    "rural_female": {
+     "n": 1349,
+     "default_rate": 0.0823,
+     "mean_pd": 0.0817,
+     "cal_gap": -0.0005,
+     "ece": 0.0045,
+     "auc": 0.7325,
+     "approval_rate": 0.0104,
+     "good_approval_rate": 0.0113,
+     "default_rate_approved": 0.0
+    },
+    "urban_male": {
+     "n": 1580,
+     "default_rate": 0.0911,
+     "mean_pd": 0.0792,
+     "cal_gap": -0.012,
+     "ece": 0.0171,
+     "auc": 0.7567,
+     "approval_rate": 0.1032,
+     "good_approval_rate": 0.1038,
+     "default_rate_approved": 0.0859
+    },
+    "zone_north": {
+     "n": 1555,
+     "default_rate": 0.0842,
+     "mean_pd": 0.077,
+     "cal_gap": -0.0072,
+     "ece": 0.0134,
+     "auc": 0.7594,
+     "approval_rate": 0.0637,
+     "good_approval_rate": 0.0667,
+     "default_rate_approved": 0.0404
+    },
+    "zone_south": {
+     "n": 1166,
+     "default_rate": 0.084,
+     "mean_pd": 0.0811,
+     "cal_gap": -0.003,
+     "ece": 0.0137,
+     "auc": 0.7494,
+     "approval_rate": 0.0566,
+     "good_approval_rate": 0.0562,
+     "default_rate_approved": 0.0909
+    },
+    "zone_east": {
+     "n": 1008,
+     "default_rate": 0.0913,
+     "mean_pd": 0.0809,
+     "cal_gap": -0.0104,
+     "ece": 0.016,
+     "auc": 0.7257,
+     "approval_rate": 0.0565,
+     "good_approval_rate": 0.0579,
+     "default_rate_approved": 0.0702
+    },
+    "zone_west": {
+     "n": 1113,
+     "default_rate": 0.0782,
+     "mean_pd": 0.0839,
+     "cal_gap": 0.0057,
+     "ece": 0.019,
+     "auc": 0.6975,
+     "approval_rate": 0.0566,
+     "good_approval_rate": 0.0565,
+     "default_rate_approved": 0.0794
+    },
+    "zone_central": {
+     "n": 785,
+     "default_rate": 0.0892,
+     "mean_pd": 0.079,
+     "cal_gap": -0.0101,
+     "ece": 0.0124,
+     "auc": 0.7388,
+     "approval_rate": 0.0624,
+     "good_approval_rate": 0.0587,
+     "default_rate_approved": 0.1429
+    },
+    "zone_northeast": {
+     "n": 373,
+     "default_rate": 0.0831,
+     "mean_pd": 0.08,
+     "cal_gap": -0.0031,
+     "ece": 0.0064,
+     "auc": 0.7375,
+     "approval_rate": 0.067,
+     "good_approval_rate": 0.0731,
+     "default_rate_approved": 0.0
+    },
+    "social_general": {
+     "n": 1768,
+     "default_rate": 0.0769,
+     "mean_pd": 0.0793,
+     "cal_gap": 0.0023,
+     "ece": 0.0032,
+     "auc": 0.7471,
+     "approval_rate": 0.0617,
+     "good_approval_rate": 0.0613,
+     "default_rate_approved": 0.0826
+    },
+    "social_obc": {
+     "n": 2605,
+     "default_rate": 0.0917,
+     "mean_pd": 0.0809,
+     "cal_gap": -0.0109,
+     "ece": 0.0137,
+     "auc": 0.7424,
+     "approval_rate": 0.0637,
+     "good_approval_rate": 0.0659,
+     "default_rate_approved": 0.0602
+    },
+    "social_sc": {
+     "n": 1078,
+     "default_rate": 0.0816,
+     "mean_pd": 0.0788,
+     "cal_gap": -0.0028,
+     "ece": 0.015,
+     "auc": 0.7372,
+     "approval_rate": 0.051,
+     "good_approval_rate": 0.0505,
+     "default_rate_approved": 0.0909
+    },
+    "social_st": {
+     "n": 549,
+     "default_rate": 0.0838,
+     "mean_pd": 0.0826,
+     "cal_gap": -0.0012,
+     "ece": 0.018,
+     "auc": 0.6673,
+     "approval_rate": 0.0528,
+     "good_approval_rate": 0.0537,
+     "default_rate_approved": 0.069
+    }
+   },
+   "summary": {
+    "female_vs_male": {
+     "air": 0.187,
+     "eod": -0.0739,
+     "cal_gap_max": 0.0085
+    },
+    "rural_vs_urban": {
+     "air": 0.728,
+     "eod": -0.018,
+     "cal_gap_max": 0.0059
+    },
+    "rural_female_vs_urban_male": {
+     "air": 0.101,
+     "eod": -0.0925,
+     "cal_gap_max": 0.012
+    },
+    "social_sc_vs_social_general": {
+     "air": 0.827,
+     "eod": -0.0108,
+     "cal_gap_max": 0.0028
+    },
+    "social_st_vs_social_general": {
+     "air": 0.856,
+     "eod": -0.0076,
+     "cal_gap_max": 0.0023
+    },
+    "social_obc_vs_social_general": {
+     "air": 0.969,
+     "eod": 0.0046,
+     "cal_gap_max": 0.0109
+    }
+   }
+  }
+ },
+ "access": {
+  "saakh_approval_rate": 0.7353,
+  "traditional_approval_rate": 0.0598,
+  "saakh_default_rate_approved": 0.0499,
+  "traditional_default_rate_approved": 0.0724,
+  "saakh_good_borrowers_reached": 0.7634,
+  "traditional_good_borrowers_reached": 0.0606
+ },
+ "candidate_gate": [
+  {
+   "feature": "log_avg_inflow",
+   "label": {
+    "en": "Business size (average monthly inflow)",
+    "hi": "व्यवसाय का आकार (औसत मासिक आय)"
+   },
+   "auc_with": 0.7411,
+   "auc_without": 0.7399,
+   "auc_gain": 0.0013,
+   "worst_eod_with": 0.0242,
+   "worst_eod_without": 0.0265,
+   "worst_air_with": 0.961,
+   "fairness_gate_msgs": [],
+   "decision": "rejected",
+   "reason": "AUC gain +0.0013 below 0.005"
+  },
+  {
+   "feature": "digital_share",
+   "label": {
+    "en": "Share of sales received digitally",
+    "hi": "डिजिटल माध्यम से प्राप्त बिक्री का हिस्सा"
+   },
+   "auc_with": 0.7399,
+   "auc_without": 0.7399,
+   "auc_gain": 0.0,
+   "worst_eod_with": 0.0265,
+   "worst_eod_without": 0.0265,
+   "worst_air_with": 0.966,
+   "fairness_gate_msgs": [],
+   "decision": "rejected",
+   "reason": "AUC gain +0.0000 below 0.005"
+  },
+  {
+   "feature": "payer_diversity",
+   "label": {
+    "en": "Breadth of paying customers",
+    "hi": "भुगतान करने वाले ग्राहकों की संख्या"
+   },
+   "decision": "removed",
+   "reason": "proxy for a protected group (AUC 0.60 > 0.6) with weak signal (IV 0.015 < 0.05)",
+   "proxy_auc": 0.603,
+   "iv": 0.0146
+  }
+ ],
+ "gate_split": "validation",
+ "proxy_audit": [
+  {
+   "feature": "inflow_cv",
+   "label": {
+    "en": "Income stability (month-to-month swings)",
+    "hi": "आय की स्थिरता (महीने-दर-महीने उतार-चढ़ाव)"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.528,
+   "auc_rural": 0.503,
+   "flag": false
+  },
+  {
+   "feature": "inflow_trend",
+   "label": {
+    "en": "Sales growth over the year",
+    "hi": "साल भर में बिक्री वृद्धि"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.501,
+   "auc_rural": 0.508,
+   "flag": false
+  },
+  {
+   "feature": "min_to_median",
+   "label": {
+    "en": "Lean-month income vs a normal month",
+    "hi": "कमज़ोर महीने की आय बनाम सामान्य महीना"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.524,
+   "auc_rural": 0.507,
+   "flag": false
+  },
+  {
+   "feature": "margin_ratio",
+   "label": {
+    "en": "Money left after business & household costs",
+    "hi": "व्यवसाय और घर के खर्च के बाद बची राशि"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.502,
+   "auc_rural": 0.51,
+   "flag": false
+  },
+  {
+   "feature": "debt_service_ratio",
+   "label": {
+    "en": "Existing repayments as share of income",
+    "hi": "आय में मौजूदा किस्तों का हिस्सा"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.504,
+   "auc_rural": 0.522,
+   "flag": false
+  },
+  {
+   "feature": "informal_share",
+   "label": {
+    "en": "Repayments to moneylenders",
+    "hi": "साहूकार को भुगतान"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.544,
+   "auc_rural": 0.55,
+   "flag": false
+  },
+  {
+   "feature": "buffer_days",
+   "label": {
+    "en": "Cash buffer (days of expenses in the account)",
+    "hi": "नकद बफ़र (खाते में कितने दिनों का खर्च)"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.5,
+   "auc_rural": 0.511,
+   "flag": false
+  },
+  {
+   "feature": "bounces_12m",
+   "label": {
+    "en": "EMI / cheque bounces in 12 months",
+    "hi": "12 महीनों में EMI / चेक बाउंस"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.515,
+   "auc_rural": 0.528,
+   "flag": false
+  },
+  {
+   "feature": "top_payer_share",
+   "label": {
+    "en": "Dependence on the largest customer",
+    "hi": "सबसे बड़े ग्राहक पर निर्भरता"
+   },
+   "in_model": false,
+   "dropped_reason": "weak or unstable signal (IV / sign check)",
+   "auc_female": 0.52,
+   "auc_rural": 0.504,
+   "flag": false
+  },
+  {
+   "feature": "months_active",
+   "label": {
+    "en": "Length of transaction history",
+    "hi": "लेनदेन इतिहास की अवधि"
+   },
+   "in_model": false,
+   "dropped_reason": "weak or unstable signal (IV / sign check)",
+   "auc_female": 0.512,
+   "auc_rural": 0.506,
+   "flag": false
+  },
+  {
+   "feature": "neg_months_share",
+   "label": {
+    "en": "Months where spending exceeded income",
+    "hi": "महीने जब खर्च आय से अधिक था"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.504,
+   "auc_rural": 0.508,
+   "flag": false
+  },
+  {
+   "feature": "proposed_dsr",
+   "label": {
+    "en": "New EMI as a share of monthly income",
+    "hi": "मासिक आय में नई EMI का हिस्सा"
+   },
+   "in_model": true,
+   "dropped_reason": null,
+   "auc_female": 0.506,
+   "auc_rural": 0.503,
+   "flag": false
+  },
+  {
+   "feature": "log_avg_inflow",
+   "label": {
+    "en": "Business size (average monthly inflow)",
+    "hi": "व्यवसाय का आकार (औसत मासिक आय)"
+   },
+   "in_model": false,
+   "dropped_reason": "rejected by fairness/accuracy gate",
+   "auc_female": 0.648,
+   "auc_rural": 0.652,
+   "flag": true
+  },
+  {
+   "feature": "digital_share",
+   "label": {
+    "en": "Share of sales received digitally",
+    "hi": "डिजिटल माध्यम से प्राप्त बिक्री का हिस्सा"
+   },
+   "in_model": false,
+   "dropped_reason": "rejected by fairness/accuracy gate",
+   "auc_female": 0.501,
+   "auc_rural": 0.712,
+   "flag": true
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+id: day_nrlm
+short: DAY-NRLM SHG loan
+name: {en: "DAY-NRLM SHG Bank Linkage", hi: "दीनदयाल अंत्योदय योजना – राष्ट्रीय ग्रामीण आजीविका मिशन (SHG बैंक लिंकेज)"}
+kind: group_loan
+agency: {en: "Banks with the State Rural Livelihoods Mission", hi: "बैंक तथा राज्य ग्रामीण आजीविका मिशन"}
+status: active
+apply_via: {name: Block mission office / bank branch, url: "https://aajeevika.gov.in/"}
+summary:
+  en: "Collateral-free bank loans to rural self-help groups (no collateral up to ₹20 lakh), with interest subvention for women's SHGs. Rates are notified each year; the latest verified terms are for FY 2025-26."
+  hi: "ग्रामीण स्वयं सहायता समूहों को बिना गिरवी बैंक ऋण (₹20 लाख तक गिरवी नहीं), महिला समूहों के लिए ब्याज अनुदान। दरें हर साल अधिसूचित होती हैं; नवीनतम सत्यापित शर्तें वित्त वर्ष 2025-26 की हैं।"
+criteria:
+  id: nrlm.all
+  all:
+    - id: nrlm.shg
+      fact: ownership_type
+      op: eq
+      value: shg
+      text: {en: "Borrower is a self-help group", hi: "उधारकर्ता स्वयं सहायता समूह है"}
+      cite: {source: rbi_nrlm_mc, loc: "Para 2, SHGs under DAY-NRLM"}
+    - id: nrlm.women
+      text: {en: "Women's SHG (men may be members only of groups of persons with disabilities, elders or transgender persons)", hi: "महिला समूह (पुरुष केवल दिव्यांगजन, बुज़ुर्ग या ट्रांसजेंडर व्यक्तियों के समूह में सदस्य हो सकते हैं)"}
+      cite: {source: rbi_nrlm_mc, loc: "Para 2.1"}
+      any:
+        - {fact: shg_women_only, op: eq, value: true}
+        - {fact: shg_mixed_special, op: eq, value: true}
+    - id: nrlm.size
+      text: {en: "10–20 members (special SHGs in difficult or remote tribal areas, or of persons with disabilities: minimum 5)", hi: "10–20 सदस्य (कठिन/दूरस्थ आदिवासी क्षेत्र या दिव्यांगजनों के विशेष समूह: न्यूनतम 5)"}
+      cite: {source: rbi_nrlm_mc, loc: "Para 2.2"}
+      any:
+        - {fact: shg_members, op: between, value: [10, 20]}
+        - all:
+            - {fact: shg_small_special, op: eq, value: true}
+            - {fact: shg_members, op: between, value: [5, 20]}
+    - id: nrlm.age
+      fact: shg_age_months
+      op: gte
+      value: 6
+      text: {en: "Saving and lending together for at least 6 months", hi: "कम से कम 6 महीने से साथ बचत और ऋण गतिविधि"}
+      cite: {source: rbi_nrlm_mc, loc: "Eligibility of SHGs for credit linkage", verification: official_unverified}
+    - id: nrlm.grading
+      fact: shg_grading_passed
+      op: eq
+      value: true
+      text: {en: "Passed grading (Panchasutra norms)", hi: "ग्रेडिंग (पंचसूत्र) उत्तीर्ण"}
+      cite: {source: rbi_nrlm_mc, loc: "Eligibility of SHGs, grading", verification: official_unverified}
+    - id: nrlm.rural
+      fact: area_type
+      op: eq
+      value: rural
+      text: {en: "Rural SHG; this bank-linkage and subvention programme covers rural areas only", hi: "ग्रामीण समूह, यह बैंक लिंकेज और अनुदान कार्यक्रम केवल ग्रामीण क्षेत्रों के लिए है"}
+      cite: {source: rbi_nrlm_mc, loc: "Annex II Part I(i), rural areas only"}
+lender_checks:
+  - text: {en: "The bank assesses the group's credit limit (cash credit / term loan doses)", hi: "बैंक समूह की ऋण सीमा (कैश क्रेडिट / सावधि ऋण किश्तें) तय करता है"}
+    cite: {source: rbi_nrlm_mc, loc: "Para 7.3.3"}

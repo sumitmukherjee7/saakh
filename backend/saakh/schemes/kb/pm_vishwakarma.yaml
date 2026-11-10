@@ -1,0 +1,73 @@
+id: pm_vishwakarma
+short: PM Vishwakarma
+name: {en: PM Vishwakarma, hi: पीएम विश्वकर्मा}
+kind: subsidised_loan
+agency: {en: "Ministry of MSME (registration at Common Service Centre)", hi: "एमएसएमई मंत्रालय (कॉमन सर्विस सेंटर पर पंजीकरण)"}
+status: active
+apply_via: {name: PM Vishwakarma portal via CSC, url: "https://pmvishwakarma.gov.in/"}
+summary:
+  en: "For artisans in 18 traditional family trades: recognition, skill training, toolkit incentive up to ₹15,000 and collateral-free credit of ₹1 lakh + ₹2 lakh at 5% interest."
+  hi: "18 पारंपरिक पारिवारिक व्यवसायों के कारीगरों के लिए: मान्यता, कौशल प्रशिक्षण, ₹15,000 तक टूलकिट प्रोत्साहन और 5% ब्याज पर ₹1 लाख + ₹2 लाख बिना गिरवी ऋण।"
+criteria:
+  id: pmv.all
+  all:
+    - id: pmv.age
+      fact: age
+      op: gte
+      value: 18
+      text: {en: "At least 18 years old on the date of registration", hi: "पंजीकरण की तिथि पर कम से कम 18 वर्ष"}
+      cite: {source: pmv_portal, loc: "Eligibility Criteria, point 2 (also FAQ 5)"}
+    - id: pmv.trade
+      fact: vishwakarma_trade
+      op: not_in
+      value: [none]
+      text: {en: "Works in one of the 18 notified trades (e.g. tailor/darzi, blacksmith/lohar)", hi: "18 अधिसूचित व्यवसायों में से एक (जैसे दर्ज़ी, लोहार)"}
+      cite: {source: pmv_portal, loc: "Eligible Trades (also FAQ 3)"}
+    - id: pmv.family_trade
+      fact: is_traditional_family_trade
+      op: eq
+      value: true
+      text: {en: "Family-based traditional trade, self-employed in the unorganised sector", hi: "पारिवारिक पारंपरिक व्यवसाय, असंगठित क्षेत्र में स्वरोज़गार"}
+      cite: {source: pmv_portal, loc: "Eligibility Criteria, point 1"}
+    - id: pmv.self_employed
+      fact: ownership_type
+      op: in
+      value: [individual, proprietorship]
+      text: {en: "Artisan works on a self-employment basis", hi: "कारीगर स्वरोज़गार के आधार पर काम करता है"}
+      cite: {source: pmv_portal, loc: "Eligibility Criteria, point 1"}
+    - id: pmv.no_pmegp
+      fact: pmegp_last_5y
+      op: eq
+      value: false
+      text: {en: "No PMEGP loan in the past 5 years", hi: "पिछले 5 वर्षों में PMEGP ऋण नहीं"}
+      cite: {source: pmv_portal, loc: "Eligibility Criteria, point 3, past 5 years"}
+    - id: pmv.no_other_govt_loan
+      fact: other_govt_selfemp_loan_5y
+      op: eq
+      value: false
+      text: {en: "No loan in the past 5 years under another Central/State self-employment or business credit scheme (fully repaid MUDRA/SVANidhi loans are allowed)", hi: "पिछले 5 वर्षों में किसी अन्य केंद्र/राज्य स्वरोज़गार या व्यवसाय ऋण योजना में ऋण नहीं (पूरी तरह चुकाए गए मुद्रा/स्वनिधि ऋण की अनुमति)"}
+      cite: {source: pmv_portal, loc: "Eligibility Criteria, point 3, similar credit-based schemes, past 5 years"}
+    - id: pmv.no_outstanding
+      fact: outstanding_mudra_or_svanidhi
+      op: eq
+      value: false
+      text: {en: "No outstanding MUDRA / PM SVANidhi loan (fully repaid borrowers can apply)", hi: "कोई बकाया मुद्रा / पीएम स्वनिधि ऋण नहीं (पूरा चुकाने वाले आवेदन कर सकते हैं)"}
+      cite: {source: pmv_faq, loc: "FAQ 24; Eligibility Criteria, point 3"}
+    - id: pmv.one_per_family
+      fact: family_member_registered_pmv
+      op: eq
+      value: false
+      text: {en: "Only one member per family (husband, wife, unmarried children)", hi: "प्रति परिवार केवल एक सदस्य (पति, पत्नी, अविवाहित बच्चे)"}
+      cite: {source: pmv_portal, loc: "Eligibility Criteria, point 4 (also FAQ 22–23)"}
+    - id: pmv.no_govt_service
+      fact: family_member_in_govt_service
+      op: eq
+      value: false
+      text: {en: "No family member in government service", hi: "परिवार का कोई सदस्य सरकारी सेवा में नहीं"}
+      cite: {source: pmv_portal, loc: "Eligibility Criteria, point 5 (also FAQ 21)"}
+caveats:
+  - id: pmv.cv.pmegp
+    when: {fact: availed_pmegp, op: eq, value: true}
+    text: {en: "Official sources differ: the eligibility criteria use a 5-year lookback, but FAQ 24 says anyone who has availed a PMEGP loan cannot apply. Confirm at the CSC before registering.",
+           hi: "आधिकारिक स्रोतों में अंतर: पात्रता मानदंड 5 वर्ष देखते हैं, पर FAQ 24 कहता है कि PMEGP ऋण लेने वाला आवेदन नहीं कर सकता। पंजीकरण से पहले CSC पर पुष्टि करें।"}
+    cite: {source: pmv_faq, loc: "FAQ 24"}

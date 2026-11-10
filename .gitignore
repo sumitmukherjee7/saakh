@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+backend/saakh.db*
+frontend/node_modules/
+frontend/dist/
+.pytest_cache/
+
+# organiser material, kept locally, not redistributed
+Hackathon Link.url
+hackathon_brief.md
+problem_explanation_*.pdf
+
+# uploaded documents (runtime data)
+backend/uploads/
+Tech4Bharat-2026-Problem-Statements.pdf

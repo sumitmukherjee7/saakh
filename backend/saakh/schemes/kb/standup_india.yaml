@@ -1,0 +1,55 @@
+id: standup_india
+short: Stand-Up India
+name: {en: Stand-Up India, hi: स्टैंड-अप इंडिया}
+kind: loan
+agency: {en: "Scheduled commercial bank branches (SIDBI portal)", hi: "अनुसूचित वाणिज्यिक बैंक शाखाएँ (सिडबी पोर्टल)"}
+status: lapsed
+valid_to: 2025-03-31
+status_note:
+  en: "Not available as a loan product: the scheme was extended only up to 2025 and reportedly concluded in March 2025; a redesigned successor for first-time women/SC/ST entrepreneurs has been announced but is not yet operational. The portal still shows the old guidelines. Saakh shows the old conditions for reference and will alert you when a successor is notified."
+  hi: "ऋण उत्पाद के रूप में उपलब्ध नहीं: योजना केवल 2025 तक बढ़ाई गई थी और कथित तौर पर मार्च 2025 में समाप्त हुई; पहली बार की महिला/SC/ST उद्यमियों के लिए नई योजना घोषित है पर अभी चालू नहीं। पोर्टल पर पुराने दिशानिर्देश दिखते हैं। साख संदर्भ हेतु पुरानी शर्तें दिखाता है और नई योजना अधिसूचित होने पर सूचित करेगा।"
+status_cite: [{source: dfs_standup, loc: "Scheme page, progress as on 28.02.2025; scheme period to 31 Mar 2025"}, {source: sui_pib_extension, loc: "Extended up to the year 2025"}, {source: sui_revamp_secondary, loc: "Concluded March 2025; being redesigned"}, {source: sui_status_2026, loc: "Lok Sabha reply, 16 Mar 2026 (as reported)"}, {source: sui_guidelines, loc: "Portal still presents old guidelines"}]
+apply_via: {name: Stand-Up Mitra portal (legacy), url: "https://standupmitra.in/"}
+summary:
+  en: "Former scheme: bank loans of ₹10 lakh – ₹1 crore for greenfield enterprises of SC/ST and women entrepreneurs (period ended March 2025)."
+  hi: "पूर्व योजना: SC/ST और महिला उद्यमियों के नए उद्यमों के लिए ₹10 लाख – ₹1 करोड़ के बैंक ऋण (अवधि मार्च 2025 में समाप्त)।"
+criteria:
+  id: sui.all
+  all:
+    - id: sui.age
+      fact: age
+      op: gte
+      value: 18
+      text: {en: "Entrepreneur is above 18 years", hi: "उद्यमी की आयु 18 वर्ष से अधिक"}
+      cite: {source: sui_guidelines, loc: "Eligibility", verification: official_unverified}
+    - id: sui.target
+      text: {en: "Borrower is a woman or belongs to SC/ST", hi: "उधारकर्ता महिला है या SC/ST वर्ग से है"}
+      cite: {source: sui_guidelines, loc: "Para 1, at least one SC/ST and one woman borrower per branch"}
+      any:
+        - {fact: gender, op: eq, value: female}
+        - {fact: social_category, op: in, value: [sc, st]}
+    - id: sui.greenfield
+      fact: is_new_unit
+      op: eq
+      value: true
+      text: {en: "Loan is for a greenfield (first-time) enterprise", hi: "ऋण नए (ग्रीनफ़ील्ड) उद्यम के लिए"}
+      cite: {source: sui_guidelines, loc: "Para 1, greenfield enterprise"}
+    - id: sui.range
+      fact: loan_amount_sought
+      op: between
+      value: [1000000, 10000000]
+      text: {en: "Loan between ₹10 lakh and ₹1 crore", hi: "ऋण ₹10 लाख से ₹1 करोड़ के बीच"}
+      cite: {source: sui_guidelines, loc: "Para 1, ₹10 lakh to ₹1 crore"}
+    - id: sui.ownership
+      text: {en: "For firms, at least 51% stake held by SC/ST or woman entrepreneur", hi: "फ़र्म में कम से कम 51% हिस्सेदारी SC/ST या महिला उद्यमी की"}
+      cite: {source: sui_guidelines, loc: "Para 1, 51% shareholding and controlling stake"}
+      implies:
+        if: {fact: ownership_type, op: in, value: [partnership, company]}
+        then: {fact: women_scst_ownership_pct, op: gte, value: 51}
+lender_checks:
+  - id: sui.lc.default
+    fact: is_defaulter
+    op: eq
+    value: false
+    text: {en: "Lender credit norm: not in default to any bank or financial institution", hi: "बैंक ऋण मानदंड: किसी बैंक/वित्तीय संस्था का डिफ़ॉल्टर नहीं"}
+    cite: {source: lender_norm, loc: "Bank credit norms"}

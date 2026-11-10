@@ -1,0 +1,75 @@
+id: pmegp_upgrade
+short: PMEGP 2nd loan
+name: {en: "PMEGP, 2nd loan for upgrading existing PMEGP/REGP/MUDRA units", hi: "PMEGP, मौजूदा PMEGP/REGP/मुद्रा इकाइयों के उन्नयन हेतु दूसरा ऋण"}
+kind: subsidy_loan
+agency: {en: "KVIC / KVIB / DIC; loan from banks", hi: "केवीआईसी / केवीआईबी / DIC; ऋण बैंक से"}
+status: active
+status_note:
+  en: "Upgradation pathway for EXISTING units, separate from first-time PMEGP. Conditions are from the official PMEGP portal (read 2026-11-10); the KVIC guideline PDFs could not be opened from Saakh's environment. Confirm with the DIC."
+  hi: "मौजूदा इकाइयों के उन्नयन का रास्ता, पहली बार के PMEGP से अलग। शर्तें आधिकारिक PMEGP पोर्टल से (10-11-2026 को पढ़ी गईं); KVIC दिशानिर्देश PDF साख के वातावरण से नहीं खुल सके। DIC से पुष्टि करें।"
+status_cite: [{source: pmegp_portal, loc: "For up-gradation of existing PMEGP/REGP/MUDRA units"}, {source: kvic_2nd_loan_memo, loc: "Second-loan guidelines (7 Dec 2023)"}, {source: kvic_pmegp_2023, loc: "Second loan for upgradation of existing units"}]
+apply_via: {name: PMEGP e-Portal, existing units, url: "https://www.kviconline.gov.in/pmegpeportal/"}
+summary:
+  en: "Capital subsidy of 15% (20% in NER and hill states) for modernising or expanding a unit first set up under PMEGP, REGP or MUDRA, up to ₹1 crore (manufacturing) or ₹25 lakh (service)."
+  hi: "PMEGP, REGP या मुद्रा से बनी इकाई के आधुनिकीकरण/विस्तार हेतु 15% (पूर्वोत्तर व पहाड़ी राज्यों में 20%) पूंजी सब्सिडी, विनिर्माण ₹1 करोड़ तक, सेवा ₹25 लाख तक।"
+criteria:
+  id: pmegpu.all
+  all:
+    - id: pmegpu.existing
+      fact: is_new_unit
+      op: eq
+      value: false
+      text: {en: "Loan is for upgrading an EXISTING unit", hi: "ऋण मौजूदा इकाई के उन्नयन के लिए है"}
+      cite: {source: pmegp_upgrade, loc: "Scope, technology modernisation / expansion of existing units"}
+    - id: pmegpu.origin
+      fact: prior_scheme_unit
+      op: in
+      value: [pmegp, regp, mudra]
+      text: {en: "Unit was originally financed under PMEGP, REGP or MUDRA", hi: "इकाई मूल रूप से PMEGP, REGP या मुद्रा से वित्तपोषित थी"}
+      cite: {source: pmegp_upgrade, loc: "Eligibility, existing PMEGP/REGP/MUDRA units"}
+    - id: pmegpu.repaid
+      fact: first_loan_repaid_on_time
+      op: eq
+      value: true
+      text: {en: "First loan repaid within the stipulated time", hi: "पहला ऋण निर्धारित समय में चुकाया"}
+      cite: {source: pmegp_upgrade, loc: "Eligibility, first loan repaid in time"}
+    - id: pmegpu.mm_adjusted
+      fact: first_mm_adjusted
+      op: eq
+      value: true
+      verified_by: {en: "the bank and KVIC", hi: "बैंक और KVIC"}
+      text: {en: "Margin-money subsidy on the first loan already adjusted after its 3-year lock-in", hi: "पहले ऋण की मार्जिन मनी सब्सिडी 3 साल के लॉक-इन के बाद समायोजित हो चुकी"}
+      cite: {source: pmegp_2nd_loan_guidelines, loc: "Eligibility, margin money of first loan adjusted after lock-in"}
+    - id: pmegpu.profit
+      fact: profit_last_3y
+      op: eq
+      value: true
+      verified_by: {en: "the bank (from your ITRs / accounts)", hi: "बैंक (आपके ITR / खातों से)"}
+      text: {en: "Unit has made a profit for the last three years (COVID years FY 2020-21 and 2021-22 not counted)", hi: "इकाई पिछले तीन वर्षों से लाभ में है (कोविड वर्ष 2020-21 और 2021-22 नहीं गिने जाते)"}
+      cite: {source: pmegp_portal, loc: "For up-gradation of existing units: profit for the last three years"}
+    - id: pmegpu.udyam
+      fact: udyam_registered
+      op: eq
+      value: true
+      text: {en: "Enterprise registration (Udyam) in place", hi: "उद्यम पंजीकरण मौजूद"}
+      cite: {source: pmegp_upgrade, loc: "Eligibility, registration mandatory"}
+    - id: pmegpu.cost_mfg
+      text: {en: "Manufacturing upgrade cost up to ₹1 crore", hi: "विनिर्माण उन्नयन लागत ₹1 करोड़ तक"}
+      cite: {source: pmegp_upgrade, loc: "Maximum project cost"}
+      implies:
+        if: {fact: sector, op: eq, value: manufacturing}
+        then: {fact: project_cost, op: lte, value: 10000000}
+    - id: pmegpu.cost_svc
+      text: {en: "Service/business upgrade cost up to ₹25 lakh", hi: "सेवा/व्यवसाय उन्नयन लागत ₹25 लाख तक"}
+      cite: {source: pmegp_upgrade, loc: "Maximum project cost"}
+      implies:
+        if: {fact: sector, op: in, value: [services, trading, allied_agri]}
+        then: {fact: project_cost, op: lte, value: 2500000}
+lender_checks:
+  - text: {en: "The bank appraises whether upgrading gives the unit potential for further growth in turnover and profit", hi: "बैंक आकलन करता है कि उन्नयन से इकाई के कारोबार और लाभ में आगे वृद्धि की संभावना है या नहीं"}
+    cite: {source: kvic_pmegp_2023, loc: "Second loan, eligibility: potential for further growth"}
+caveats:
+  - id: pmegpu.cv.covid_years
+    when: {fact: profit_last_3y, op: eq, value: false}
+    text: {en: "Losses in FY 2020-21 or 2021-22 do not count against you: the COVID years are exempted from the profit test. If those were your only loss years, answer again counting the years before them.", hi: "वित्त वर्ष 2020-21 या 2021-22 का घाटा नहीं गिना जाता: कोविड वर्ष लाभ की जाँच से बाहर हैं। अगर घाटा केवल उन्हीं वर्षों में था, तो उनसे पहले के वर्ष गिनकर फिर से उत्तर दें।"}
+    cite: {source: rs_pmegp_covid, loc: "Exclusion of COVID years FY 2020-21 and 2021-22 for 2nd-loan profitability"}
