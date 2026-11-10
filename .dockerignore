@@ -1,0 +1,14 @@
+.git
+.venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+frontend/node_modules
+frontend/dist
+backend/saakh.db*
+backend/uploads
+submission
+docs/screenshots
+*.pdf
+*.url
+hackathon_brief.md

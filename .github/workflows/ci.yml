@@ -21,3 +21,16 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npx vite build
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t saakh .
+      - name: smoke test (as the host would run it)
+        run: |
+          docker run -d --name saakh -e PORT=10000 -p 10000:10000 saakh
+          for i in $(seq 1 60); do curl -fs http://localhost:10000/api/health && break; sleep 2; done
+          curl -fs http://localhost:10000/api/health | grep -q '"demo":true'
+          curl -fs http://localhost:10000/ | grep -q '<div id="root">'
+          curl -fs http://localhost:10000/api/personas | grep -q sunita
+          docker logs saakh | tail -20

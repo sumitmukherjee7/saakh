@@ -1,0 +1,15 @@
+# Render Blueprint: Dashboard > New > Blueprint > pick this repository > Apply.
+services:
+  - type: web
+    name: saakh
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: SAAKH_ENV
+        value: demo
+      - key: SAAKH_SEED
+        value: "1"
