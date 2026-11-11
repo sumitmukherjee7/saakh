@@ -78,6 +78,8 @@ It is a true agent: a goal-driven planner with persistent memory, guarded tool c
 
 ## Additional supporting links
 
+**Live demo:** https://saakh.onrender.com (first load after idle takes about a minute; all data is synthetic)
+
 **GitHub repository:** https://github.com/sumitmukherjee7/saakh
 
 **Research references (official sources the rule base cites):**

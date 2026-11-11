@@ -41,6 +41,8 @@ AUC 0.736 (95% CI 0.714–0.759) · PR-AUC 0.199 · Brier 0.073 · log loss 0.26
 
 ## See it
 
+**Live demo:** https://saakh.onrender.com (free hosting: the first visit after a quiet spell takes about a minute to wake up; all data is synthetic)
+
 **Submission:** [presentation deck (PDF)](submission/Saakh_Tech4Bharat_2026.pdf) · [PowerPoint](submission/Saakh_Tech4Bharat_2026.pptx) · [form text](submission/SUBMISSION.md)
 
 | The owner's view | Cash flow, read from the statement |
