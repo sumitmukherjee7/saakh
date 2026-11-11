@@ -46,7 +46,8 @@ def test_failure_carries_citation():
 def test_standup_india_is_not_offered_as_available():
     r = engine.evaluate_scheme("standup_india", {**SUNITA, "loan_amount_sought": 1500000, "is_new_unit": True})
     assert r["eligibility"] == "lapsed" and r["availability"] == "unavailable" and r["benefits"] == []
-    assert {"sui_pib_extension", "sui_guidelines"} <= {c["source"] for c in r["status_cites"]}
+    cites = {c["source"]: c for c in r["status_cites"]}
+    assert {"dfs_standup", "sui_guidelines"} <= set(cites) and cites["dfs_standup"]["verification"] == "verified"
     assert all(s["cites"] for s in engine.explain(r))
 
 
@@ -204,7 +205,8 @@ def test_pmegp_negative_list_unknown_activity_is_never_assumed_clear():
     assert r["eligibility"] != "eligible"
     assert engine.evaluate_scheme("pmegp", {**base, "activity": "liquor_tobacco"})["eligibility"] == "not_eligible"
     assert derive({"activity": "other", "negative_list_declared": "no"})["in_negative_list"] is False
-    assert any(c["source"] == "kvic_pmegp_2023" for c in engine.evaluate_scheme("pmegp", base)["citations"])
+    assert any(c["source"] == "rs_pmegp_negative_list_2024" and c["verification"] == "verified"
+               for c in engine.evaluate_scheme("pmegp", base)["citations"])
 
 
 def test_svanidhi_unknown_history_is_not_first_tranche_and_cgtmse_shows_no_invented_cover():

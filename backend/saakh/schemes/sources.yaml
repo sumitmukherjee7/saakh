@@ -51,7 +51,7 @@ cgtmse_cover_guidelines:
   url: https://dcmsme.gov.in/CLCS_TUS_Scheme/Credit_Guarantee_Scheme/Scheme_Guidelines.aspx
   verification: official_unverified
   checked: 2026-11-09
-  note: Coverage percentages are reported consistently by lenders; circular text could not be machine-read.
+  note: Coverage percentages are reported consistently by lenders; the circular text was not reviewed in full. Saakh no longer shows a cover percentage.
 
 sui_guidelines:
   title: Stand-Up India, Scheme Guidelines
@@ -80,8 +80,8 @@ kvic_pmegp:
   publisher: Khadi and Village Industries Commission
   url: https://www.kviconline.gov.in/pmegpeportal/
   verification: official_unverified
-  checked: 2026-11-09
-  note: Portal unreachable from our crawler on 2026-11-09 (DNS failure); clauses from PIB and lender summaries.
+  checked: 2026-11-10
+  note: Not accessible online when checked on 2026-11-10, including by manual retrieval. The clauses Saakh uses are cross-checked against the Rajya Sabha reply of 5 Aug 2024 and the official PMEGP portal; results that depend on them are provisional until the DIC confirms.
 
 pmegp_status_2026:
   title: PMEGP operating in FY 2026-27 (margin money released; approval on record only till FY 2025-26)
@@ -101,9 +101,9 @@ mudra_portal:
   title: Pradhan Mantri MUDRA Yojana, official portal (offerings, eligibility, CGFMU)
   publisher: MUDRA Ltd / Department of Financial Services
   url: https://www.mudra.org.in/
-  verification: official_unverified
-  checked: 2026-11-09
-  note: TLS certificate error on 2026-11-09; clauses from PIB and bank product pages.
+  verification: verified
+  checked: 2026-11-10
+  note: Read in full. Shishu up to Rs 50,000; Kishor above Rs 50,000 to Rs 5 lakh; Tarun above Rs 5 lakh to Rs 10 lakh; Tarun Plus above Rs 10 lakh to Rs 20 lakh for borrowers who availed and successfully repaid a Tarun loan. MUDRA states it engages no agents or middlemen.
 
 svanidhi_portal:
   title: PM SVANidhi, official portal (15k / 25k / 50k loans, LoR, credit card)
@@ -203,7 +203,7 @@ cgtmse_scheme_doc:
   url: https://www.cgtmse.in/Default/ViewFile/?id=1736356443701_CGTMSE+-+Scheme+Document+CGS+I_updated+as+on+Jan+01+2025.pdf&path=Page
   verification: official_unverified
   checked: 2026-11-09
-  note: Cover is obtained by an eligible Member Lending Institution after its own appraisal; it is not a borrower entitlement. PDF was not machine-readable from our crawler.
+  note: Cover is obtained by an eligible Member Lending Institution after its own appraisal; it is not a borrower entitlement. The scheme document has not yet been reviewed in full.
 
 pmegp_upgrade:
   title: 2nd loan for upgradation of existing PMEGP/REGP/MUDRA units
@@ -211,15 +211,15 @@ pmegp_upgrade:
   url: https://investindia.gov.in/schemes-msmes-india/2nd-loan-gradation-existing-pmegpmudra-units
   verification: official_unverified
   checked: 2026-11-09
-  note: Figures (Rs 1 crore manufacturing / Rs 25 lakh service, 15% subsidy, 20% NER & hill) match Vikaspedia and lender pages; KVIC guideline PDF unreachable (DNS) on 2026-11-09.
+  note: Figures (Rs 1 crore manufacturing / Rs 25 lakh service, 15% subsidy, 20% NER and hill) match Vikaspedia and lender pages; conditions confirmed on the official PMEGP portal.
 
 pmegp_pib_2026:
-  title: PIB release on PMEGP operations in FY 2026-27
+  title: PIB, Parliamentary Standing Committee on Industry, 333rd Report on MSME Demands for Grants 2026-27 (11 Mar 2026)
   publisher: Press Information Bureau, Government of India
   url: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2238242&lang=1&reg=1
-  verification: official_unverified
-  checked: 2026-11-09
-  note: PIB blocks automated retrieval (HTTP 403); identified via external review, not machine-verified.
+  verification: verified
+  checked: 2026-11-10
+  note: Read in full. PMEGP BE 2026-27 Rs 4,500 crore; since inception 10.73 lakh units and about 87 lakh jobs; bank rejection rates of 40-50% driven by risk-averse practice and credit-score reliance; banks still demand collateral under CGTMSE; 7.61 crore Udyam MSMEs, 99.3% micro; credit-card and Rs 2 crore term-loan announcements for first-time women/SC/ST entrepreneurs not yet implemented.
 
 sui_pib_extension:
   title: PIB, Stand-Up India scheme extended up to the year 2025
@@ -255,15 +255,15 @@ kvic_negative_list:
   url: https://www.kviconline.gov.in/pmegpeportal/dashboard/notification/20180521.pdf
   verification: official_unverified
   checked: 2026-11-10
-  note: KVIC portal unreachable from our crawler; Saakh clears only activities known not to be listed and asks a declaration otherwise. The DIC confirms.
+  note: Not accessible online when checked on 2026-11-10, including by manual retrieval. The clauses Saakh uses are cross-checked against the Rajya Sabha reply of 5 Aug 2024 and the official PMEGP portal; results that depend on them are provisional until the DIC confirms.
 
 rs_pmegp_negative_list_2024:
-  title: Rajya Sabha unstarred question (5 Aug 2024), PMEGP negative-list relaxations
+  title: "Rajya Sabha Unstarred Question 1542 (5 Aug 2024), PMEGP: activities not permitted, relaxations and the COVID-year exemption"
   publisher: Rajya Sabha (Ministry of MSME reply)
   url: https://rsdebate.nic.in/bitstream/123456789/750459/1/PQ_265_05082024_U1542_p345_p346.pdf
-  verification: official_unverified
+  verification: verified
   checked: 2026-11-10
-  note: Read via search excerpts only, says farm-linked activities and some animal husbandry (dairy, poultry, aquaculture, sericulture) were relaxed. Not machine-read in full; the current KVIC list governs.
+  note: Read in full (official reply, pp. 345-346). Lists activities not permitted (meat, intoxicants, liquor-serving outlets, tobacco, toddy; locally prohibited activities; polythene carry bags under 75 microns and recycled-plastic food packaging; cultivation, plantation, horticulture, floriculture, animal husbandry) with exceptions (non-veg food at hotels/dhabas; value addition; farm-linked sericulture, horticulture, floriculture); relaxations for dairy, poultry, aquaculture and sericulture; COVID years FY 2020-21 and 2021-22 exempted from the 2nd-loan profitability test.
 
 pmegp_2nd_loan_guidelines:
   title: Guidelines for 2nd loan for upgradation of existing PMEGP/REGP/MUDRA units (Annexure II, Ministry of MSME)
@@ -271,21 +271,21 @@ pmegp_2nd_loan_guidelines:
   url: https://www.svnit.ac.in/Unnat_Bharat/PI/pdf/Livelihood%20&%20Entreprenurship/Schemes%20by%20Government%20of%20India/PMEGP%20Pradhan%20Mantri%20Employment%20Generation%20Programme/Annexure%20II%20final-guidlines-for-2nd-loan.pdf
   verification: secondary
   checked: 2026-11-10
-  note: KVIC's revised guideline PDF is unreachable from our environment (DNS). Search excerpts agree on timely repayment, margin money adjusted after the 3-year lock-in, and the Rs 1 crore / Rs 25 lakh caps; a fixed 3-year profit rule appears only in non-official summaries, so it is not applied.
+  note: Ministry of MSME 2nd-loan guidelines (copy). States profit in the last three years, timely repayment and margin money adjusted after lock-in; the official PMEGP portal (pmegp_portal) confirms the three-year profit condition.
 pmegp_pib_oct_2026:
   title: PIB release of 28 Oct 2026 on PMEGP in FY 2026-27
   publisher: Press Information Bureau, Government of India
   url: https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2329819&lang=2&reg=48
-  verification: official_unverified
+  verification: verified
   checked: 2026-11-10
-  note: Primary source cited by an external reviewer; PIB refuses automated retrieval (HTTP 403), so not machine-read by us.
+  note: "Read in full. PMEGP is operating in FY 2026-27: Rs 1,000 crore of margin money released on 28 Oct 2026; 25,895 units supported in FY 2026-27 up to October; about 75 lakh jobs since FY 2014-15."
 dfs_standup:
   title: Stand-Up India Scheme (SUPI), Department of Financial Services
   publisher: Department of Financial Services, Ministry of Finance
   url: https://financialservices.gov.in/index.php/stand-india-scheme-supi
-  verification: official_unverified
+  verification: verified
   checked: 2026-11-10
-  note: Official page; our fetch failed (TLS hostname mismatch on www.). Search excerpts show progress "as on 28.02.2025"; scheme period to 31 Mar 2025, successor not notified.
+  note: Read in full. The scheme ran up to 31.03.2025 in line with the 15th Finance Commission; the EFC note for the announced successor (term loans up to Rs 2 crore for first-time women/SC/ST entrepreneurs) is under preparation.
 
 kvic_pmegp_2023:
   title: PMEGP, revised scheme guidelines (KVIC, December 2023)
@@ -293,7 +293,7 @@ kvic_pmegp_2023:
   url: https://www.kviconline.gov.in/pmegpeportal/dashboard/notification/Revised_PMEGP_Scheme_Guidelines_07122023_compressed.pdf
   verification: official_unverified
   checked: 2026-11-10
-  note: The governing document. Our crawler could not open it (DNS failure on kviconline.gov.in, retried 2026-11-10); the clauses Saakh uses were cross-checked against a Rajya Sabha reply (Aug 2024), state KVIB pages and the Ministry's 2nd-loan guidelines. Where they differ, Saakh marks the result provisional or shows a caveat.
+  note: Not accessible online when checked on 2026-11-10, including by manual retrieval. The clauses Saakh uses are cross-checked against the Rajya Sabha reply of 5 Aug 2024 and the official PMEGP portal; results that depend on them are provisional until the DIC confirms.
 
 pmegp_portal:
   title: PMEGP portal (Ministry of MSME), eligibility for up-gradation of existing PMEGP/REGP/MUDRA units
@@ -308,11 +308,19 @@ rs_pmegp_covid:
   url: https://rsdebate.nic.in/bitstream/123456789/758105/1/PQ_267_03022025_U107_p356_p358.pdf
   verification: official_unverified
   checked: 2026-11-10
-  note: Read via search excerpts ("COVID years i.e., FY2020-21 and FY2021-22 have been exempted while considering profitability"); not machine-read in full.
+  note: Only a third-party summary of this reply was available, not its official text. The same exemption is stated in the official Rajya Sabha reply of 5 Aug 2024 (rs_pmegp_negative_list_2024), which Saakh cites instead.
 kvic_2nd_loan_memo:
   title: PMEGP second-loan guidelines, KVIC memorandum of 7 Dec 2023
   publisher: Khadi and Village Industries Commission
   url: https://kviconline.gov.in/pmegpeportal/dashboard/notification/PMEGP_Scheme_Guidelines_07122023_Second_Loan.pdf
   verification: official_unverified
   checked: 2026-11-10
-  note: Cited by an external reviewer as describing the three-year test with the COVID-year exclusion; not readable from our environment (DNS failure on kviconline.gov.in).
+  note: Not accessible online when checked on 2026-11-10, including by manual retrieval. The clauses Saakh uses are cross-checked against the Rajya Sabha reply of 5 Aug 2024 and the official PMEGP portal; results that depend on them are provisional until the DIC confirms.
+
+pib_urban_poor_2026:
+  title: PIB, Schemes for urban poor (Lok Sabha reply, 29 Jan 2026), DAY-NULM and PM SVANidhi
+  publisher: Press Information Bureau (Ministry of Housing and Urban Affairs)
+  url: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2220349&lang=1&reg=1
+  verification: verified
+  checked: 2026-11-10
+  note: Read in full. DAY-NULM implementation ended on 30.09.2024. PM SVANidhi restructured in Aug 2025, lending extended to March 2030, first and second tranches Rs 15,000 and Rs 25,000, a UPI-linked credit card of up to Rs 30,000 for eligible vendors, coverage extended to census towns and peri-urban areas in a graded manner.

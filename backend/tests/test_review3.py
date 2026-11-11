@@ -18,8 +18,9 @@ def test_a_yes_declaration_always_beats_a_broad_activity_label():
     assert derive({"activity": "tailoring"})["in_negative_list"] is False
     assert derive({"activity": "tailoring", "negative_list_declared": "yes"})["in_negative_list"] is True
     assert "in_negative_list" not in derive({"activity": "tailoring", "negative_list_declared": "unsure"})
-    assert "in_negative_list" not in derive({"activity": "dairy"})
-    assert derive({"activity": "dairy", "negative_list_declared": "no"})["in_negative_list"] is False
+    assert derive({"activity": "dairy"})["in_negative_list"] is False  # dairy is explicitly relaxed (RS reply, 5 Aug 2024)
+    assert "in_negative_list" not in derive({"activity": "food_processing"})
+    assert derive({"activity": "food_processing", "negative_list_declared": "no"})["in_negative_list"] is False
     with pytest.raises(ValueError):
         coerce("negative_list_declared", True)  # old boolean form is no longer accepted
 

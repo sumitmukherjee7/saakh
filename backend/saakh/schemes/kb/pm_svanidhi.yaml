@@ -4,7 +4,7 @@ name: {en: "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)", hi: "पीए�
 kind: loan
 agency: {en: "Ministry of Housing & Urban Affairs; loans via banks, NBFCs, MFIs", hi: "आवास और शहरी कार्य मंत्रालय; ऋण बैंक/एनबीएफसी/एमएफआई से"}
 status: active
-status_cite: [{source: svanidhi_cabinet_2025, loc: "Lending period extended to 31 Mar 2030"}]
+status_cite: [{source: pib_urban_poor_2026, loc: "Restructured Aug 2025; lending period extended to March 2030"}]
 valid_to: 2030-03-31
 apply_via: {name: PM SVANidhi portal, url: "https://pmsvanidhi.mohua.gov.in/"}
 summary:
@@ -30,4 +30,4 @@ criteria:
       op: eq
       value: urban
       text: {en: "Vends in a statutory town (being extended to census towns and peri-urban areas)", hi: "वैधानिक शहर में विक्रय (जनगणना शहरों और उपनगरीय क्षेत्रों तक विस्तार हो रहा है)"}
-      cite: {source: svanidhi_cabinet_2025, loc: "Coverage expansion beyond statutory towns"}
+      cite: {source: pib_urban_poor_2026, loc: "Benefits extended to census towns and peri-urban areas in a graded manner"}

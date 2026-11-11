@@ -268,17 +268,19 @@ _f(Fact("negative_list_declared", "enum", {"en": "Activity and the PMEGP negativ
                  Option("yes", {"en": "Yes, clearly one of these", "hi": "हाँ, साफ़ तौर पर इनमें से एक"}),
                  Option("unsure", {"en": "Partly / not sure", "hi": "आंशिक रूप से / पक्का नहीं"})],
         prior={"no": 0.85, "yes": 0.05, "unsure": 0.10},
-        question={"en": "Is your business mainly one of these? (1) slaughtering animals or a meat business, serving non-veg food "
-                        "at a hotel or dhaba is allowed; (2) making or selling liquor, toddy, tobacco, pan or beedi; (3) making "
-                        "polythene carry bags thinner than the legal limit, or recycled-plastic bags/containers for food; "
-                        "(4) directly growing tea, coffee, rubber or similar plantation crops, processing them is different; "
-                        "(5) something your State or local body bans. If it only partly matches or you are unsure, choose that, "
+        question={"en": "Is your business mainly one of these? (1) slaughtering animals or a meat business (serving non-veg food "
+                        "at a hotel or dhaba is allowed); (2) making or selling liquor, toddy, tobacco, pan or beedi, or a hotel or "
+                        "dhaba that serves liquor; (3) making polythene carry bags under 75 microns, or recycled-plastic bags or "
+                        "containers for food; (4) growing crops, plantations (tea, coffee, rubber), fruit, vegetables or flowers, or "
+                        "rearing animals other than dairy, poultry, fish or silkworms (processing and value addition are allowed); "
+                        "(5) something your State or local body bans. If it only partly matches or you are unsure, choose that; "
                         "the DIC checks the exact rules.",
-                  "hi": "क्या आपका व्यवसाय मुख्यतः इनमें से एक है? (1) पशु-वध या मांस का व्यवसाय, होटल/ढाबे पर मांसाहारी भोजन परोसना "
-                        "अनुमत है; (2) शराब, ताड़ी, तंबाकू, पान या बीड़ी बनाना/बेचना; (3) तय सीमा से पतले पॉलिथीन कैरी बैग, या भोजन "
-                        "के लिए रिसाइकल्ड प्लास्टिक बैग/डिब्बे बनाना; (4) सीधे चाय, कॉफ़ी, रबर जैसी बागान फसलें उगाना, प्रसंस्करण "
-                        "अलग है; (5) कुछ ऐसा जिसे आपका राज्य/स्थानीय निकाय प्रतिबंधित करता है। आंशिक रूप से मेल खाए या पक्का न हो तो "
-                        "वही चुनें, DIC सटीक नियम जाँचता है।"},
+                  "hi": "क्या आपका व्यवसाय मुख्यतः इनमें से एक है? (1) पशु-वध या मांस का व्यवसाय (होटल/ढाबे पर मांसाहारी भोजन परोसना "
+                        "अनुमत है); (2) शराब, ताड़ी, तंबाकू, पान या बीड़ी बनाना/बेचना, या शराब परोसने वाला होटल/ढाबा; (3) 75 माइक्रॉन से "
+                        "पतले पॉलिथीन कैरी बैग, या भोजन के लिए रिसाइकल्ड प्लास्टिक बैग/डिब्बे बनाना; (4) फसल, बागान (चाय, कॉफ़ी, रबर), "
+                        "फल, सब्ज़ी या फूल उगाना, या डेयरी, मुर्गी, मछली या रेशम-कीट के अलावा पशुपालन (प्रसंस्करण और मूल्य-वर्धन अनुमत "
+                        "हैं); (5) कुछ ऐसा जिसे आपका राज्य/स्थानीय निकाय प्रतिबंधित करता है। आंशिक रूप से मेल खाए या पक्का न हो तो वही "
+                        "चुनें; DIC सटीक नियम जाँचता है।"},
         why={"en": "PMEGP does not fund activities on its negative list; the DIC confirms against the current list.",
              "hi": "PMEGP निषेध सूची की गतिविधियों को वित्त नहीं देता; DIC मौजूदा सूची से पुष्टि करता है।"}))
 _f(Fact("pmegp_last_5y", "bool", {"en": "PMEGP loan in the last 5 years", "hi": "पिछले 5 वर्षों में PMEGP ऋण"}, options=yes_no(),
@@ -486,7 +488,8 @@ def coerce(key: str, value: Any) -> Any:
 
 
 NEGATIVE_LIST_ACTIVITIES = {"liquor_tobacco"}
-CLEARED_ACTIVITIES = {"tailoring", "fabrication", "leaf_plates", "repair_services"}
+# Known not to be on the list: dairy is explicitly relaxed (Rajya Sabha reply, 5 Aug 2024, answer (d)(iii)).
+CLEARED_ACTIVITIES = {"tailoring", "fabrication", "leaf_plates", "repair_services", "dairy"}
 
 
 def derive(facts: dict[str, Any]) -> dict[str, Any]:

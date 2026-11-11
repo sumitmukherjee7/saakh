@@ -28,7 +28,7 @@ India's micro enterprises earn trust every day in UPI payments, yet banks ask fo
 
 ### 1. The problem, seen from the owner's side
 
-Sunita stitches for about 60 customers a month, mostly paid by UPI. She has no ITR, so the bank cannot see her. She qualifies for PM Vishwakarma and MUDRA, but nobody has told her. She repays a moneylender ₹1,200 every Monday on a ₹50,000 loan, about 57% a year. Her story is the problem in Theme 3.2: viable businesses with real, digital cash flows are locked out of formal credit and the schemes built for them. The barrier is not creditworthiness; it is paperwork, scheme complexity, months of branch visits, and agents who take 10 to 15%. SIDBI and Crisil estimate India's addressable MSME credit gap at about ₹30 lakh crore, and over 7.9 crore enterprises are now on the Udyam platforms, about 99% of them micro.
+Sunita stitches for about 60 customers a month, mostly paid by UPI. She has no ITR, so the bank cannot see her. She qualifies for PM Vishwakarma and MUDRA, but nobody has told her. She repays a moneylender ₹1,200 every Monday on a ₹50,000 loan, about 57% a year. Her story is the problem in Theme 3.2: viable businesses with real, digital cash flows are locked out of formal credit and the schemes built for them. The barrier is not creditworthiness; it is paperwork, scheme complexity, months of branch visits, and agents who take 10 to 15%. SIDBI and Crisil estimate India's addressable MSME credit gap at about ₹30 lakh crore. A parliamentary committee reported in March 2026 that 7.61 crore MSMEs are on the Udyam portal, 99.3% of them micro, and that banks reject 40 to 50% of PMEGP applications, driven by reliance on credit scores. Cash-flow underwriting is the missing piece.
 
 ### 2. What Saakh does, in about two minutes per owner
 
@@ -82,6 +82,10 @@ It is a true agent: a goal-driven planner with persistent memory, guarded tool c
 
 **Research references (official sources the rule base cites):**
 - RBI Master Circular on DAY-NRLM (RBI/2025-26/02): https://www.rbi.org.in/Scripts/BS_ViewMasCirculardetails.aspx?id=12806
+- Rajya Sabha reply on PMEGP activities not permitted, relaxations and the COVID-year exemption (5 Aug 2024): https://rsdebate.nic.in/bitstream/123456789/750459/1/PQ_265_05082024_U1542_p345_p346.pdf
+- PIB on PMEGP in FY 2026-27 (28 Oct 2026): https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2329819&lang=2&reg=48
+- Department of Financial Services, Stand-Up India status: https://www.financialservices.gov.in/stand-india-scheme-supi
+- MUDRA (PMMY) loan categories: https://www.mudra.org.in/
 - PMEGP portal, Ministry of MSME: https://common-pmegp.msme.gov.in/Home/HomePage
 - PM Vishwakarma, eligibility and FAQ: https://pmvishwakarma.gov.in/
 - CGTMSE eligible borrowers and facilities: https://www.cgtmse.in/Home/VS/95
@@ -92,6 +96,6 @@ It is a true agent: a goal-driven planner with persistent memory, guarded tool c
 
 **Market sizing:**
 - SIDBI with Crisil, "Understanding Indian MSME Sector: Progress and Challenges" (May 2025), MSME credit gap about ₹30 lakh crore: https://www.sidbi.in/annualreport/AnnualReport202425/msme-outlook.php
-- PIB backgrounder (May 2026), over 7.9 crore enterprises on Udyam platforms: https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/may/doc2026514869801.pdf
+- Parliamentary Standing Committee on Industry, 333rd report (PIB, 11 Mar 2026): 7.61 crore Udyam MSMEs, 99.3% micro; 40 to 50% PMEGP bank rejection rates: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2238242&lang=1&reg=1
 
 If the form takes a single link field, use the GitHub repository: its README links the architecture, model card, business model, field research plan and the full list of cited sources.

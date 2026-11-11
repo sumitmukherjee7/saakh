@@ -5,9 +5,9 @@ kind: subsidy_loan
 agency: {en: "KVIC, KVIB and District Industries Centre (DIC); loan from banks", hi: "केवीआईसी, केवीआईबी और ज़िला उद्योग केंद्र; ऋण बैंक से"}
 status: active
 status_note:
-  en: "Running in FY 2026-27 (margin money being released); the cabinet approval on record covers up to FY 2025-26, confirm with DIC."
-  hi: "वित्त वर्ष 2026-27 में चालू (मार्जिन मनी जारी हो रही है); रिकॉर्ड पर स्वीकृति 2025-26 तक की है, DIC से पुष्टि करें।"
-status_cite: [{source: pmegp_pib_oct_2026, loc: "FY 2026-27 operations (28 Oct 2026)"}, {source: pmegp_pib_2026, loc: "FY 2026-27 operations"}, {source: pmegp_status_2026, loc: "Oct 2026 report on margin-money release"}]
+  en: "Running in FY 2026-27: Rs 4,500 crore budgeted for 2026-27, and Rs 1,000 crore of margin money released on 28 Oct 2026."
+  hi: "वित्त वर्ष 2026-27 में चालू: 2026-27 के लिए ₹4,500 करोड़ का बजट, और 28 अक्टूबर 2026 को ₹1,000 करोड़ की मार्जिन मनी जारी।"
+status_cite: [{source: pmegp_pib_oct_2026, loc: "Rs 1,000 crore margin money released; FY 2026-27 progress"}, {source: pmegp_pib_2026, loc: "PMEGP: BE 2026-27 Rs 4,500 crore"}]
 apply_via: {name: PMEGP e-Portal (KVIC), url: "https://www.kviconline.gov.in/pmegpeportal/"}
 summary:
   en: "Credit-linked capital subsidy (15–35% of project cost) for setting up NEW micro enterprises, up to ₹50 lakh manufacturing, ₹20 lakh service/business."
@@ -87,12 +87,12 @@ criteria:
       value: false
       verified_by: {en: "the DIC / district task force", hi: "DIC / ज़िला टास्क फ़ोर्स"}
       text: {en: "Activity is not on the PMEGP negative list (e.g. meat/slaughter, intoxicants, some plastic products, direct cultivation of plantation crops; local prohibitions also apply), self-declared until the DIC checks it against the current list", hi: "गतिविधि PMEGP निषेध सूची में नहीं (जैसे मांस/पशु-वध, नशीले पदार्थ, कुछ प्लास्टिक उत्पाद, बागान फसलों की सीधी खेती; स्थानीय प्रतिबंध भी लागू), DIC के मौजूदा सूची से जाँचने तक यह स्व-घोषित है"}
-      cite: {source: kvic_pmegp_2023, loc: "Negative list of activities (revised guidelines, as amended)"}
+      cite: {source: rs_pmegp_negative_list_2024, loc: "Answer (c): activities not permitted under PMEGP; (d)(iii) animal-husbandry relaxations"}
 lender_checks:
   - text: {en: "The DIC / district task force checks the activity against the current negative list, a Saakh match on this point is provisional until then. The list has been relaxed over time (e.g. some farm-linked and animal-husbandry activities), so it is not hard-coded here", hi: "DIC / ज़िला टास्क फ़ोर्स गतिविधि को मौजूदा निषेध सूची से जाँचती है, तब तक साख का यह मिलान अस्थायी है। सूची में समय-समय पर ढील दी गई है (जैसे कुछ कृषि-संबद्ध और पशुपालन गतिविधियाँ), इसलिए इसे यहाँ स्थायी रूप से नहीं लिखा गया"}
     cite: {source: rs_pmegp_negative_list_2024, loc: "Reply on relaxations to the PMEGP negative list"}
 caveats:
   - id: pmegp.cv.exceptions
     when: {fact: in_negative_list, op: eq, value: true}
-    text: {en: "The negative list has exceptions, e.g. serving non-veg food at a hotel or dhaba is allowed, and the plastic exclusion depends on bag thickness and food use. If your activity may be an exception, ask the DIC before giving up on PMEGP.", hi: "निषेध सूची में अपवाद हैं, जैसे होटल/ढाबे पर मांसाहारी भोजन परोसना अनुमत है, और प्लास्टिक का नियम बैग की मोटाई और भोजन-उपयोग पर निर्भर है। अगर आपकी गतिविधि अपवाद हो सकती है, तो PMEGP छोड़ने से पहले DIC से पूछें।"}
-    cite: {source: rs_pmegp_negative_list_2024, loc: "Reply on the negative list: hotels/dhabas; polythene carry bags"}
+    text: {en: "The negative list has exceptions: serving non-veg food at a hotel or dhaba is allowed; dairy, poultry, aquaculture and sericulture are allowed; value addition to farm produce and farm-linked work in sericulture, horticulture and floriculture are allowed; the plastic exclusion covers carry bags under 75 microns and recycled-plastic food packaging. If your activity may be an exception, ask the DIC before giving up on PMEGP.", hi: "निषेध सूची में अपवाद हैं: होटल/ढाबे पर मांसाहारी भोजन परोसना अनुमत है; डेयरी, मुर्गीपालन, मत्स्यपालन और रेशम-पालन अनुमत हैं; कृषि उपज में मूल्य-वर्धन और रेशम, बागवानी, फूल-खेती से जुड़े कार्य अनुमत हैं; प्लास्टिक का नियम 75 माइक्रॉन से पतले कैरी बैग और भोजन के लिए रिसाइकल्ड प्लास्टिक पैकेजिंग पर है। अगर आपकी गतिविधि अपवाद हो सकती है, तो PMEGP छोड़ने से पहले DIC से पूछें।"}
+    cite: {source: rs_pmegp_negative_list_2024, loc: "Answer (c)(i), (c)(iii), (c)(iv) and (d)(iii)"}

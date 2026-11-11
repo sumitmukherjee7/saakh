@@ -150,7 +150,7 @@ def benefits(scheme_id: str, f: dict) -> list[dict]:
             tranche = [15_000, 25_000, 50_000][int(rep)]
             out.append(_b("Your next loan tranche (after " + str(int(rep)) + " fully repaid)", "आपकी अगली ऋण किस्त", inr(tranche),
                           "svanidhi_portal", "Apply for 15k / 25k / 50k", tranche, "loan"))
-        out.append(_b("UPI-linked credit card after repaying the 2nd tranche", "दूसरी किस्त चुकाने के बाद UPI-जुड़ा क्रेडिट कार्ड",
+        out.append(_b("UPI-linked credit card of up to ₹30,000 for eligible vendors", "पात्र विक्रेताओं के लिए ₹30,000 तक का UPI-जुड़ा क्रेडिट कार्ड",
                       None, "svanidhi_portal", "Credit card for 2nd-tranche-repaid vendors"))
         out.append(_b("Interest subsidy and digital-payment cashback", "ब्याज सब्सिडी और डिजिटल भुगतान कैशबैक",
                       "7% interest subsidy · cashback up to ₹1,600", "svanidhi_cabinet_2025", "Restructured scheme benefits",

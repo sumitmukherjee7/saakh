@@ -172,7 +172,7 @@ def test_negative_list_yes_shows_the_exceptions_and_partly_stays_open():
     assert engine.evaluate_scheme("pmegp", {**f, "negative_list_declared": "unsure"})["eligibility"] == "needs_info"
     from saakh.facts import FACTS
     q = FACTS["negative_list_declared"].question["en"]
-    assert "hotel or dhaba is allowed" in q and "thinner than the legal limit" in q
+    assert "hotel or dhaba is allowed" in q and "under 75 microns" in q and "dairy, poultry, fish or silkworms" in q
 
 
 # ------------------------------------------------------------------ self-review: OTP brute force, request-id reuse

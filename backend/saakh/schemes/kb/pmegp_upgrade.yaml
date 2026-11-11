@@ -5,8 +5,8 @@ kind: subsidy_loan
 agency: {en: "KVIC / KVIB / DIC; loan from banks", hi: "केवीआईसी / केवीआईबी / DIC; ऋण बैंक से"}
 status: active
 status_note:
-  en: "Upgradation pathway for EXISTING units, separate from first-time PMEGP. Conditions are from the official PMEGP portal (read 2026-11-10); the KVIC guideline PDFs could not be opened from Saakh's environment. Confirm with the DIC."
-  hi: "मौजूदा इकाइयों के उन्नयन का रास्ता, पहली बार के PMEGP से अलग। शर्तें आधिकारिक PMEGP पोर्टल से (10-11-2026 को पढ़ी गईं); KVIC दिशानिर्देश PDF साख के वातावरण से नहीं खुल सके। DIC से पुष्टि करें।"
+  en: "Upgradation pathway for EXISTING units, separate from first-time PMEGP. Conditions are from the official PMEGP portal and the Rajya Sabha reply of 5 Aug 2024. Confirm with the DIC."
+  hi: "मौजूदा इकाइयों के उन्नयन का रास्ता, पहली बार के PMEGP से अलग। शर्तें आधिकारिक PMEGP पोर्टल और 5 अगस्त 2024 के राज्यसभा उत्तर से। DIC से पुष्टि करें।"
 status_cite: [{source: pmegp_portal, loc: "For up-gradation of existing PMEGP/REGP/MUDRA units"}, {source: kvic_2nd_loan_memo, loc: "Second-loan guidelines (7 Dec 2023)"}, {source: kvic_pmegp_2023, loc: "Second loan for upgradation of existing units"}]
 apply_via: {name: PMEGP e-Portal, existing units, url: "https://www.kviconline.gov.in/pmegpeportal/"}
 summary:
@@ -72,4 +72,4 @@ caveats:
   - id: pmegpu.cv.covid_years
     when: {fact: profit_last_3y, op: eq, value: false}
     text: {en: "Losses in FY 2020-21 or 2021-22 do not count against you: the COVID years are exempted from the profit test. If those were your only loss years, answer again counting the years before them.", hi: "वित्त वर्ष 2020-21 या 2021-22 का घाटा नहीं गिना जाता: कोविड वर्ष लाभ की जाँच से बाहर हैं। अगर घाटा केवल उन्हीं वर्षों में था, तो उनसे पहले के वर्ष गिनकर फिर से उत्तर दें।"}
-    cite: {source: rs_pmegp_covid, loc: "Exclusion of COVID years FY 2020-21 and 2021-22 for 2nd-loan profitability"}
+    cite: {source: rs_pmegp_negative_list_2024, loc: "Answer (d)(iv): COVID years FY 2020-21 and 2021-22 exempted for 2nd-loan profitability"}

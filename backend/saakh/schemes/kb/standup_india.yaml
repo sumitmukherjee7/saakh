@@ -6,9 +6,9 @@ agency: {en: "Scheduled commercial bank branches (SIDBI portal)", hi: "अनु
 status: lapsed
 valid_to: 2025-03-31
 status_note:
-  en: "Not available as a loan product: the scheme was extended only up to 2025 and reportedly concluded in March 2025; a redesigned successor for first-time women/SC/ST entrepreneurs has been announced but is not yet operational. The portal still shows the old guidelines. Saakh shows the old conditions for reference and will alert you when a successor is notified."
-  hi: "ऋण उत्पाद के रूप में उपलब्ध नहीं: योजना केवल 2025 तक बढ़ाई गई थी और कथित तौर पर मार्च 2025 में समाप्त हुई; पहली बार की महिला/SC/ST उद्यमियों के लिए नई योजना घोषित है पर अभी चालू नहीं। पोर्टल पर पुराने दिशानिर्देश दिखते हैं। साख संदर्भ हेतु पुरानी शर्तें दिखाता है और नई योजना अधिसूचित होने पर सूचित करेगा।"
-status_cite: [{source: dfs_standup, loc: "Scheme page, progress as on 28.02.2025; scheme period to 31 Mar 2025"}, {source: sui_pib_extension, loc: "Extended up to the year 2025"}, {source: sui_revamp_secondary, loc: "Concluded March 2025; being redesigned"}, {source: sui_status_2026, loc: "Lok Sabha reply, 16 Mar 2026 (as reported)"}, {source: sui_guidelines, loc: "Portal still presents old guidelines"}]
+  en: "Not available as a loan product: the Department of Financial Services states the scheme ran up to 31.03.2025. A successor for first-time women/SC/ST entrepreneurs (term loans up to Rs 2 crore) was announced, but its EFC note is still under preparation and a March 2026 parliamentary report lists it as not yet implemented. Saakh shows the old conditions for reference and will alert you when a successor is notified."
+  hi: "ऋण उत्पाद के रूप में उपलब्ध नहीं: वित्तीय सेवा विभाग के अनुसार योजना 31.03.2025 तक थी। पहली बार की महिला/SC/ST उद्यमियों के लिए नई योजना (₹2 करोड़ तक के सावधि ऋण) घोषित हुई, पर उसका EFC नोट अभी तैयार हो रहा है और मार्च 2026 की संसदीय रिपोर्ट इसे अभी लागू नहीं बताती। साख संदर्भ हेतु पुरानी शर्तें दिखाता है और नई योजना अधिसूचित होने पर सूचित करेगा।"
+status_cite: [{source: dfs_standup, loc: "Scheme upto 31.03.2025; successor's EFC note under preparation"}, {source: pmegp_pib_2026, loc: "Budget 2025-26 announcements: Rs 2 crore term loans not yet implemented"}, {source: sui_guidelines, loc: "Portal still presents old guidelines"}]
 apply_via: {name: Stand-Up Mitra portal (legacy), url: "https://standupmitra.in/"}
 summary:
   en: "Former scheme: bank loans of ₹10 lakh – ₹1 crore for greenfield enterprises of SC/ST and women entrepreneurs (period ended March 2025)."
