@@ -76,7 +76,7 @@ def rank_questions(facts: dict, askable: set[str] | None = None, skip: set[str] 
         kb = load_kb()
         ranked.append({
             "fact": key, "voi": round(voi, 1),
-            "affects": [{"id": sid, "short": kb[sid]["short"], "p_settle": round(p, 2)}
+            "affects": [{"id": sid, "short": kb[sid]["short"], "short_hi": kb[sid].get("short_hi", kb[sid]["short"]), "p_settle": round(p, 2)}
                         for sid, p in sorted(affected.items(), key=lambda x: -x[1])],
         })
     ranked.sort(key=lambda r: -r["voi"])

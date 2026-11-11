@@ -11,6 +11,8 @@ const CARD_FOR: Record<string, string[]> = {
   documents: ["documents"], approval: ["approval"], fallback_statement: ["fallback_statement"],
 };
 
+const SMS_HI: Record<string, string> = { consent: "सहमति देने", approval: "अंतिम मंज़ूरी देने", statement_upload: "विवरण अपलोड करने" };
+
 const STEPS = [
   { k: "talk", en: "Talk", hi: "बात" }, { k: "consent", en: "Permission", hi: "अनुमति" }, { k: "data", en: "Your business", hi: "व्यवसाय" },
   { k: "schemes", en: "Schemes", hi: "योजनाएँ" }, { k: "offer", en: "Offer", hi: "ऑफ़र" }, { k: "docs", en: "Documents", hi: "दस्तावेज़" },
@@ -161,9 +163,9 @@ export default function Entrepreneur({ mode }: { mode: "self" | "assisted" }) {
             <div className="font-semibold leading-tight">साख · Saakh {mode === "assisted" && <span className="pill bg-white/20 ml-1"><Store size={11} />JanAI Café</span>}</div>
             <div className="text-[11px] opacity-80">{c.facts?.name || c.persona} · {c.id}</div>
           </div>
-          <button title="Simulate network loss" onClick={() => (simOffline ? goOnline() : setSimOffline(true))}
+          <button title={lang === "hi" ? "नेटवर्क जाना सिम्युलेट करें" : "Simulate network loss"} onClick={() => (simOffline ? goOnline() : setSimOffline(true))}
             className={`pill ${simOffline || !online ? "bg-saffron-400 text-ink-900" : "bg-white/15"}`}>
-            <WifiOff size={11} />{simOffline || !online ? (lang === "hi" ? "ऑफ़लाइन" : "offline") : "net"}</button>
+            <WifiOff size={11} />{simOffline || !online ? (lang === "hi" ? "ऑफ़लाइन" : "offline") : (lang === "hi" ? "नेट" : "net")}</button>
         </div>
         <div className="flex gap-1 px-3 py-2 border-b border-slate-100 overflow-x-auto">
           {STEPS.map((s, i) => (
@@ -181,7 +183,7 @@ export default function Entrepreneur({ mode }: { mode: "self" | "assisted" }) {
                   <div className={`rounded-2xl px-3 py-2 text-[14px] leading-relaxed ${m.role === "user" ? "bg-brand-600 text-white rounded-br-md" : "bg-white border border-slate-200 text-ink-900 rounded-bl-md"}`}>
                     {t(m.text, lang)}
                     {m.role === "agent" && (
-                      <button className="ml-1 align-middle text-ink-400 hover:text-brand-600" title="Read aloud" onClick={() => speak(t(m.text, lang), lang)}>
+                      <button className="ml-1 align-middle text-ink-400 hover:text-brand-600" title={lang === "hi" ? "पढ़कर सुनाएँ" : "Read aloud"} onClick={() => speak(t(m.text, lang), lang)}>
                         <Volume2 size={14} /></button>)}
                   </div>
                   {m.card && <CardView card={m.card} c={c} act={act} active={m.id === activeId && !busy}
@@ -209,16 +211,21 @@ export default function Entrepreneur({ mode }: { mode: "self" | "assisted" }) {
       <div className="h-[calc(100vh-88px)] overflow-y-auto">
         {c.demo_sms_otp && (
           <div className="card p-3 mb-3 text-[13px] border-violet-200 bg-violet-50">
-            <b>Entrepreneur's phone (simulated SMS):</b> your Saakh code{c.demo_sms_purpose ? ` to ${c.demo_sms_purpose.replace(/_/g, " ")}` : ""} is <span className="font-mono font-bold">{c.demo_sms_otp}</span>. It works once and expires in 10 minutes.
-            <span className="block text-[11px] text-ink-500">Demo build only. No SMS provider is integrated, so production builds do not offer assisted mode.</span>
+            {lang === "hi" ? (<>
+              <b>उद्यमी का फ़ोन (सिम्युलेटेड SMS):</b> {SMS_HI[c.demo_sms_purpose] ? `${SMS_HI[c.demo_sms_purpose]} के लिए ` : ""}आपका साख कोड <span className="font-mono font-bold">{c.demo_sms_otp}</span> है। यह एक बार चलता है और 10 मिनट में समाप्त हो जाता है।
+              <span className="block text-[11px] text-ink-500">केवल डेमो संस्करण। कोई SMS सेवा जुड़ी नहीं है, इसलिए असली संस्करण में सहायता मोड उपलब्ध नहीं है।</span>
+            </>) : (<>
+              <b>Entrepreneur's phone (simulated SMS):</b> your Saakh code{c.demo_sms_purpose ? ` to ${c.demo_sms_purpose.replace(/_/g, " ")}` : ""} is <span className="font-mono font-bold">{c.demo_sms_otp}</span>. It works once and expires in 10 minutes.
+              <span className="block text-[11px] text-ink-500">Demo build only. No SMS provider is integrated, so production builds do not offer assisted mode.</span>
+            </>)}
           </div>
         )}
         <div className="flex gap-2 mb-3">
           {c.mode === "assisted" && ["consent", "approval", "fallback_statement"].includes(c.pending?.type) &&
-            <button className="btn-ghost" disabled={busy} onClick={() => act({ type: "resend_code" })}>New code</button>}
-          {demo && <button className="btn-ghost" disabled={busy || !!c.submission} onClick={fastForward} title="Demo build only, stops before final approval">
-            <FastForward size={14} />Demo fast-forward (stops before approval)</button>}
-          <button className="btn-ghost" onClick={() => { clearCaseSecrets(); setC(null); }}><RotateCcw size={14} />New case</button>
+            <button className="btn-ghost" disabled={busy} onClick={() => act({ type: "resend_code" })}>{lang === "hi" ? "नया कोड" : "New code"}</button>}
+          {demo && <button className="btn-ghost" disabled={busy || !!c.submission} onClick={fastForward} title={lang === "hi" ? "केवल डेमो संस्करण, अंतिम मंज़ूरी से पहले रुकता है" : "Demo build only, stops before final approval"}>
+            <FastForward size={14} />{lang === "hi" ? "डेमो फ़ास्ट-फ़ॉरवर्ड (मंज़ूरी से पहले रुकता है)" : "Demo fast-forward (stops before approval)"}</button>}
+          <button className="btn-ghost" onClick={() => { clearCaseSecrets(); setC(null); }}><RotateCcw size={14} />{lang === "hi" ? "नया मामला" : "New case"}</button>
         </div>
         <AgentPanel c={c} onCase={setC} />
       </div>

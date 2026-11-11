@@ -34,7 +34,7 @@ export default function App() {
             <div className="flex items-center gap-2">
               <img src="/icon.svg" className="w-8 h-8" alt="" />
               <div className="leading-tight"><div className="font-bold text-ink-900">Saakh <span className="text-brand-600">साख</span></div>
-                <div className="text-[10px] text-ink-400 -mt-0.5 hidden sm:block">credit & schemes copilot</div></div>
+                <div className="text-[10px] text-ink-400 -mt-0.5 hidden sm:block">{lang === "hi" ? "ऋण और योजना सहायक" : "credit & schemes copilot"}</div></div>
             </div>
             <nav className="flex gap-1 overflow-x-auto ml-2">
               {TABS.map((x) => (

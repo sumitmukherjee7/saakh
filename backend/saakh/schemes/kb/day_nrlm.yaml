@@ -1,5 +1,6 @@
 id: day_nrlm
 short: DAY-NRLM SHG loan
+short_hi: डीएवाई-एनआरएलएम स्वयं सहायता समूह ऋण
 name: {en: "DAY-NRLM SHG Bank Linkage", hi: "दीनदयाल अंत्योदय योजना – राष्ट्रीय ग्रामीण आजीविका मिशन (SHG बैंक लिंकेज)"}
 kind: group_loan
 agency: {en: "Banks with the State Rural Livelihoods Mission", hi: "बैंक तथा राज्य ग्रामीण आजीविका मिशन"}

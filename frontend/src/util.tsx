@@ -10,6 +10,48 @@ export function t(x: any, lang: Lang): string {
   return x[lang] ?? x.en ?? "";
 }
 
+/** A scheme's short name in the current language (scheme results carry short/short_hi; offers scheme_short/scheme_short_hi). */
+export function sname(x: any, lang: Lang): string {
+  if (!x) return "";
+  if (lang === "hi") return x.short_hi || x.scheme_short_hi || x.short || x.scheme_short || "";
+  return x.short || x.scheme_short || "";
+}
+
+/** Inline bilingual text: const L = useL(); L("English", "हिन्दी"). */
+export function useL() {
+  const { lang } = useLang();
+  return (en: string, hi: string) => (lang === "hi" ? hi : en);
+}
+
+// Audit groups used in the fairness tables
+const GROUPS: Record<string, string> = {
+  female: "महिलाएँ", male: "पुरुष", rural: "ग्रामीण", urban: "शहरी", rural_female: "ग्रामीण महिलाएँ", urban_male: "शहरी पुरुष",
+  zone_north: "उत्तर क्षेत्र", zone_south: "दक्षिण क्षेत्र", zone_east: "पूर्व क्षेत्र", zone_west: "पश्चिम क्षेत्र",
+  zone_central: "मध्य क्षेत्र", zone_northeast: "पूर्वोत्तर क्षेत्र", social_general: "सामान्य वर्ग", social_obc: "ओबीसी",
+  social_sc: "अनुसूचित जाति (SC)", social_st: "अनुसूचित जनजाति (ST)",
+};
+export function groupName(g: string, lang: Lang): string {
+  if (lang === "hi") return g.split("_vs_").map((x) => GROUPS[x] || x.replace(/_/g, " ")).join(" बनाम ");
+  return g.replace(/_vs_/g, " vs ").replace(/_/g, " ");
+}
+
+/** Hindi for the fixed sentence patterns the training report writes; anything else stays as written. */
+export function reportText(s: string | null | undefined, lang: Lang): string {
+  if (!s || lang !== "hi") return s || "";
+  const known: Record<string, string> = {
+    "rejected by fairness/accuracy gate": "निष्पक्षता/सटीकता जाँच में अस्वीकार",
+    "weak or unstable signal (IV / sign check)": "कमज़ोर या अस्थिर संकेत (IV / दिशा जाँच)",
+    "adds predictive value without harming fairness": "निष्पक्षता को नुकसान पहुँचाए बिना अनुमान बेहतर करता है",
+    "ITR filed AND collateral AND ≥2 years vintage AND no bounces": "ITR दाखिल, और गिरवी, और कम से कम 2 साल पुराना व्यवसाय, और कोई बाउंस नहीं",
+  };
+  if (known[s]) return known[s];
+  let m = s.match(/^AUC gain ([+\-\d.]+) below ([\d.]+)$/);
+  if (m) return `AUC में बढ़त ${m[1]}, सीमा ${m[2]} से कम`;
+  m = s.match(/^proxy for a protected group \(AUC ([\d.]+) > ([\d.]+)\) with weak signal \(IV ([\d.]+) < ([\d.]+)\)$/);
+  if (m) return `संरक्षित समूह का परोक्ष संकेतक (AUC ${m[1]} > ${m[2]}) और कमज़ोर संकेत (IV ${m[3]} < ${m[4]})`;
+  return s;
+}
+
 export function kb(bytes: number): string { return bytes < 1024 ? `${bytes} B` : `${Math.round(bytes / 1024)} KB`; }
 
 export function inr(n: number | null | undefined, short = false): string {

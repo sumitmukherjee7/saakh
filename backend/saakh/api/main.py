@@ -44,7 +44,7 @@ from ..docs.pdf import credit_memo, project_report
 from ..docs.planner import DOCS
 from ..facts import FACTS, fact_public
 from ..risk.scorecard import ARTIFACTS
-from ..schemes.engine import evaluate_all, kb_summary, load_sources
+from ..schemes.engine import evaluate_all, kb_summary, load_kb, load_sources
 from ..util import sha256
 
 CLIENT_EVENTS = {"message", "consent", "answer", "correct", "skip", "action", "choose_offer", "upload", "approve",
@@ -340,6 +340,7 @@ def _summary(a: dict) -> dict:
     return {**base, "applicant": a.get("applicant_name") or p["applicant"].get("name"),
             "business": p["applicant"].get("business_name"), "district": p["applicant"].get("district"),
             "activity": p["applicant"].get("activity"), "amount": p["offer"]["amount"], "scheme": p["offer"]["scheme_short"],
+            "scheme_hi": load_kb().get(p["offer"].get("scheme_id") or "", {}).get("short_hi") or p["offer"]["scheme_short"],
             "band": p["risk"]["band"], "pd": p["risk"]["pd"], "schedule_type": p["schedule_type"],
             "complete": not pending, "pending_items": pending, "docs": len(p["documents"]),
             "attachments": sum(1 for d in p["documents"] if d.get("attachment")),
@@ -396,7 +397,7 @@ def lender_get(aid: str, principal: str = Depends(lender_auth)):
     an = c.get("analysis") or {}
     detail = {"score": c.get("score"), "insights": an.get("insights"), "categories": an.get("categories"),
               "monthly": an.get("monthly"), "informal": an.get("informal_loans"),
-              "schemes": [{k: r.get(k) for k in ("id", "short", "name", "kind", "eligibility", "provisional", "availability", "failing", "benefits",
+              "schemes": [{k: r.get(k) for k in ("id", "short", "short_hi", "name", "kind", "eligibility", "provisional", "availability", "failing", "benefits",
                                                  "citations", "verification", "status_note", "scheme_status", "lender_checks", "caveats")}
                           for r in c.get("schemes", [])],
               "documents": c.get("documents"),
@@ -529,7 +530,7 @@ def screen(n: int = 40, seed: int = 5):
     rnd = random.Random(seed)
     acts = [("tailoring", "manufacturing", "tailor"), ("dairy", "allied_agri", "none"), ("leaf_plates", "manufacturing", "none"),
             ("food_processing", "manufacturing", "none"), ("retail", "trading", "none"), ("street_food", "trading", "none")]
-    members, totals = [], {}
+    members, totals, totals_hi = [], {}, {}
     names = ["Sushila", "Phulmani", "Budhni", "Sarita", "Rita", "Babita", "Mangri", "Sukhmati", "Anita", "Kiran", "Lalita", "Meera"]
     for i in range(n):
         act, sector, trade = rnd.choice(acts)
@@ -551,15 +552,18 @@ def screen(n: int = 40, seed: int = 5):
               and r["availability"] == "available"]
         for r in el:
             totals[r["short"]] = totals.get(r["short"], 0) + 1
+            totals_hi[r["short_hi"]] = totals_hi.get(r["short_hi"], 0) + 1
         members.append({"id": f"M{i + 1:03d}", "name": f"{rnd.choice(names)} {rnd.choice(['Munda', 'Oraon', 'Devi', 'Kumari', 'Toppo'])}",
-                        "activity": act, "need": f["loan_amount_sought"], "eligible": [r["short"] for r in el],
+                        "activity": act, "need": f["loan_amount_sought"], "eligible": [r["short"] for r in el], "eligible_hi": [r["short_hi"] for r in el],
                         "value": round(sum(r["est_value"] for r in el[:1])),
                         "unlock": "Udyam" if not f["udyam_registered"] and sector != "allied_agri" else None})
-    return {"members": members, "by_scheme": totals, "n": n,
+    return {"members": members, "by_scheme": totals, "by_scheme_hi": totals_hi, "n": n,
             "with_any": sum(1 for m in members if m["eligible"]),
             "est_annual_value": sum(m["value"] for m in members),
             "note": "Synthetic member list; profile-only screening (no financial data, no consent needed). "
-                    "'Eligible' means scheme conditions are met, lenders still appraise."}
+                    "'Eligible' means scheme conditions are met, lenders still appraise.",
+            "note_hi": "कृत्रिम सदस्य सूची; केवल प्रोफ़ाइल से जाँच (कोई वित्तीय डेटा नहीं, इसलिए सहमति की ज़रूरत नहीं)। "
+                       "'पात्र' का अर्थ है योजना की शर्तें पूरी हैं; बैंक फिर भी आकलन करता है।"}
 
 
 # --------------------------------------------------------------------------- demo-only

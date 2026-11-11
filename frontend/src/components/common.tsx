@@ -17,6 +17,8 @@ export function VerBadge({ v }: { v: string }) {
 }
 
 export function CiteChip({ c, n }: { c: any; n?: number }) {
+  const { lang } = useLang();
+  const hi = lang === "hi";
   const [open, setOpen] = useState(false);
   if (!c) return null;
   const color = c.verification === "verified" ? "text-emerald-700 bg-emerald-50 border-emerald-200"
@@ -26,18 +28,18 @@ export function CiteChip({ c, n }: { c: any; n?: number }) {
       <button onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
         className={`ml-1 inline-flex items-center rounded-md border px-1.5 text-[10px] font-semibold ${color}`}
         title={c.title}>
-        {n != null ? `[${n}]` : "source"}
+        {n != null ? `[${n}]` : hi ? "स्रोत" : "source"}
       </button>
       {open && (
         <span className="absolute z-30 left-0 top-6 w-72 card p-3 text-left text-xs text-ink-700 leading-snug" onClick={(e) => e.stopPropagation()}>
           <span className="block font-semibold text-ink-900">{c.title}</span>
           <span className="block text-ink-500 mt-0.5">{c.publisher}</span>
-          <span className="block mt-1"><span className="label">Locator</span> {c.loc}</span>
+          <span className="block mt-1"><span className="label">{hi ? "स्थान" : "Locator"}</span> {c.loc}</span>
           <span className="block mt-1"><VerBadge v={c.verification} /></span>
-          <span className="block mt-1 text-ink-400">Checked {c.checked}</span>
+          <span className="block mt-1 text-ink-400">{hi ? "जाँचा गया" : "Checked"} {c.checked}</span>
           {c.note && <span className="block mt-1 text-amber-700">{c.note}</span>}
           <a className="mt-2 inline-flex items-center gap-1 text-brand-700 font-semibold" href={c.url} target="_blank" rel="noreferrer">
-            Open source <ExternalLink size={12} /></a>
+            {hi ? "स्रोत खोलें" : "Open source"} <ExternalLink size={12} /></a>
         </span>
       )}
     </span>
@@ -61,10 +63,12 @@ export function StatusPill({ s, kind, provisional }: { s: string; kind?: string;
 }
 
 export function BandChip({ band, pd }: { band: string; pd?: number }) {
+  const { lang } = useLang();
+  const hi = lang === "hi";
   const cls: any = { A: "bg-emerald-600", B: "bg-emerald-500", C: "bg-amber-500", D: "bg-orange-600", E: "bg-rose-600" };
   return (
     <span className={`pill text-white ${cls[band] || "bg-slate-400"}`}>
-      Band {band}{pd != null && <span className="font-normal opacity-90" title="Simulated risk estimate from a model trained on synthetic data"> · sim. risk {pct(pd)}</span>}
+      {hi ? "बैंड" : "Band"} {band}{pd != null && <span className="font-normal opacity-90" title={hi ? "कृत्रिम डेटा पर प्रशिक्षित मॉडल का सिम्युलेटेड जोखिम अनुमान" : "Simulated risk estimate from a model trained on synthetic data"}> · {hi ? "सिम. जोखिम" : "sim. risk"} {pct(pd)}</span>}
     </span>
   );
 }
@@ -72,9 +76,9 @@ export function BandChip({ band, pd }: { band: string; pd?: number }) {
 const ICON: any = { T: <Check size={13} className="text-emerald-600" />, F: <X size={13} className="text-rose-600" />,
   U: <HelpCircle size={13} className="text-amber-600" /> };
 
-function fmtVal(v: any) {
-  if (v === true) return "yes";
-  if (v === false) return "no";
+function fmtVal(v: any, lang: string) {
+  if (v === true) return lang === "hi" ? "हाँ" : "yes";
+  if (v === false) return lang === "hi" ? "नहीं" : "no";
   if (Array.isArray(v)) return v.join(" – ");
   if (typeof v === "number" && v >= 1000) return "₹" + v.toLocaleString("en-IN");
   return String(v);
@@ -92,7 +96,7 @@ export function ProofTree({ node, depth = 0, cites }: { node: any; depth?: numbe
         <span className="flex-1">
           {t(node.text, lang)}
           {node.kind === "leaf" && node.actual != null && (
-            <span className="ml-1 text-ink-400 text-[11px]">(you: {fmtVal(node.actual)})</span>)}
+            <span className="ml-1 text-ink-400 text-[11px]">({lang === "hi" ? "आप" : "you"}: {fmtVal(node.actual, lang)})</span>)}
           {node.cite && <CiteChip c={node.cite} n={idx(node.cite) || undefined} />}
         </span>
       </div>
@@ -103,7 +107,7 @@ export function ProofTree({ node, depth = 0, cites }: { node: any; depth?: numbe
       {depth > 0 && (
         <button className="flex items-center gap-1 text-xs text-ink-500 py-1" onClick={() => setOpen(!open)}>
           {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}{ICON[node.status]}
-          <span>{node.kind === "any" ? "any of" : node.kind === "all" ? "all of" : node.kind}</span>
+          <span>{node.kind === "any" ? (lang === "hi" ? "इनमें से कोई एक" : "any of") : node.kind === "all" ? (lang === "hi" ? "ये सभी" : "all of") : node.kind === "not" ? (lang === "hi" ? "यह नहीं" : "not") : node.kind}</span>
         </button>
       )}
       {open && (node.children || []).map((c: any) => <ProofTree key={c.id} node={c} depth={depth + 1} cites={cites} />)}
@@ -122,5 +126,6 @@ export function Stat({ label, value, sub, tone }: { label: string; value: any; s
 }
 
 export function SimBadge() {
-  return <span className="pill bg-violet-50 text-violet-700 border border-violet-200">SIMULATED</span>;
+  const { lang } = useLang();
+  return <span className="pill bg-violet-50 text-violet-700 border border-violet-200">{lang === "hi" ? "सिम्युलेटेड" : "SIMULATED"}</span>;
 }

@@ -1,5 +1,6 @@
 id: pmmy
 short: MUDRA
+short_hi: मुद्रा
 name: {en: Pradhan Mantri MUDRA Yojana (PMMY), hi: प्रधानमंत्री मुद्रा योजना}
 kind: loan
 agency: {en: "Banks, NBFCs, MFIs and RRBs (refinanced by MUDRA)", hi: "बैंक, एनबीएफसी, एमएफआई और ग्रामीण बैंक (मुद्रा द्वारा पुनर्वित्त)"}

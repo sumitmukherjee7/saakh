@@ -141,7 +141,7 @@ def kb_summary() -> list[dict]:
         for lf in leaves:
             counts[lf["cite"]["verification"]] += 1
         out.append({
-            "id": s["id"], "short": s["short"], "name": s["name"], "kind": s["kind"], "status": s["status"],
+            "id": s["id"], "short": s["short"], "short_hi": s.get("short_hi", s["short"]), "name": s["name"], "kind": s["kind"], "status": s["status"],
             "status_note": s.get("status_note"), "summary": s["summary"], "agency": s["agency"],
             "apply_via": s.get("apply_via"), "n_criteria": len(leaves), "verification": counts,
             "criteria": leaves, "availability": AVAILABILITY[s["status"]],
@@ -364,7 +364,7 @@ def evaluate_scheme(scheme_id: str, facts: dict, as_of: date | None = None) -> d
         if _eval(cv["when"], df, cv["cite"], cv.get("id", "cv"))["status"] == T:
             cav.append({"text": cv["text"], "cite": resolve_cite(cv["cite"])})
     return {
-        "id": s["id"], "short": s["short"], "name": s["name"], "kind": s["kind"], "agency": s["agency"],
+        "id": s["id"], "short": s["short"], "short_hi": s.get("short_hi", s["short"]), "name": s["name"], "kind": s["kind"], "agency": s["agency"],
         "summary": s["summary"], "apply_via": s.get("apply_via"),
         "scheme_status": s["status"], "status_note": s.get("status_note"),
         "status_cites": [resolve_cite(c) for c in s.get("status_cite", []) or []],
@@ -437,7 +437,8 @@ def unlock_actions(facts: dict) -> list[dict]:
             out.append({
                 "action": f.action.id, "fact": key, "label": f.action.label, "effort": f.action.effort,
                 "url": f.action.url,
-                "unlocks": [{"id": sid, "short": kb[sid]["short"], "becomes": ELIG[after[sid]]} for sid in gained],
+                "unlocks": [{"id": sid, "short": kb[sid]["short"], "short_hi": kb[sid].get("short_hi", kb[sid]["short"]),
+                             "becomes": ELIG[after[sid]]} for sid in gained],
             })
     return out
 
@@ -466,7 +467,7 @@ def explain(result: dict, lang: str = "en") -> list[dict]:
     verify that each sentence carries a citation id.
     """
     out = []
-    name = result["short"]
+    name = result.get("short_hi", result["short"]) if lang == "hi" else result["short"]
     if result.get("availability") == "unavailable":
         out.append({"text": t_(result["status_note"], lang) if result.get("status_note") else
                     {"en": f"{name} is not currently available.", "hi": f"{name} अभी उपलब्ध नहीं है।"}[lang],

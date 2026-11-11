@@ -60,6 +60,7 @@ function b64(buf: ArrayBuffer): string {
 export const api = {
   health: () => req("/api/health"),
   personas: () => req<any[]>("/api/personas"),
+  facts: () => req<Record<string, any>>("/api/facts"),
   createCase: async (persona: string, lang: string, mode: string) => {
     const c = await req<Case>("/api/cases", { method: "POST", body: JSON.stringify({ persona, lang, mode }) });
     setToken(c.id, c.case_token);

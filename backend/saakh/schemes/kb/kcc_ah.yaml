@@ -1,5 +1,6 @@
 id: kcc_ah
 short: KCC (Dairy)
+short_hi: केसीसी (डेयरी)
 name: {en: "Kisan Credit Card for Animal Husbandry & Dairying", hi: "पशुपालन और डेयरी के लिए किसान क्रेडिट कार्ड"}
 kind: credit_line
 agency: {en: "Banks, RRBs and co-operative banks", hi: "बैंक, ग्रामीण बैंक और सहकारी बैंक"}

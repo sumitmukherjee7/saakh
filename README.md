@@ -2,6 +2,12 @@
 
 **Tech4Bharat 2026 · Theme 3 MSME Finance & Compliance · Problem 3.2 "Formal credit and schemes" · Agentic AI**
 
+> ### ▶ Try the live demo: **[saakh.onrender.com](https://saakh.onrender.com)**
+> Pick an entrepreneur (Sunita is a good start), type or speak what they need, then press **Demo fast-forward** to watch the agent work up to the approval step. Switch **हि / EN** at the top right. Open **JanAI Café** for the assisted mode, **Branch** to see the bank's side (choose a branch from the demo list), and **Governance** for the fairness gates and cited rules.
+> Free hosting: the first visit after a quiet spell takes about a minute to wake up. All people and data are synthetic, and every external system is a labelled simulation.
+>
+> **Deck:** [PDF](submission/Saakh_Tech4Bharat_2026.pdf) · [PowerPoint](submission/Saakh_Tech4Bharat_2026.pptx)
+
 *Saakh* means creditworthiness: the trust a business has earned. Tailors, fabricators, dairy units and SHG enterprises earn that trust every day in UPI flows that no bank form recognises. Saakh is an agent that turns those consented flows into **bank-ready credit**. It finds the schemes whose conditions the business meets, citing a source for every claim and separating what the scheme requires from what the lender still decides. It sizes a loan the business can repay in its lean months. It assembles a lender-ready file that lists anything still pending, and nothing leaves the phone until the entrepreneur approves **that exact file**.
 
 > All people, statements and bureau records are synthetic. Account Aggregator, DigiLocker, credit bureau, Udyam, PM SVANidhi and lender systems are **simulated adapters** with production-shaped interfaces. The UI labels every one of them **SIMULATED**.

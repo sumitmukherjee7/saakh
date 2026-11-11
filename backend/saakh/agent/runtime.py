@@ -187,7 +187,8 @@ def _t_offers(case):
                        uplift=(case.get("project") or {}).get("uplift", 0.0))
         grants = [b for b in r["benefits"] if b.get("kind") == "grant"]
         offers.append({
-            "index": len(offers), "scheme_id": sid, "scheme_short": r["short"], "scheme_name": r["name"],
+            "index": len(offers), "scheme_id": sid, "scheme_short": r["short"], "scheme_short_hi": r.get("short_hi", r["short"]),
+            "scheme_name": r["name"],
             "requested": st["need"], "amount": st["recommended"], "rate": st["rate"], "tenure": st["tenure"],
             "binding": st["binding_constraint"], "why": st["why"], "limits": st["limits"],
             "risk": st["risk_at_recommended"], "risk_at_request": st["risk_at_request"],
@@ -295,7 +296,7 @@ def _t_assemble(case):
 
 LENDER_FACTS = ("name", "age", "gender", "district", "state", "area_type", "activity", "sector", "years_in_business",
                 "ownership_type", "udyam_registered", "enterprise_class", "annual_turnover", "business_name", "project_cost")
-LENDER_SCHEME_KEYS = ("id", "short", "name", "kind", "eligibility", "provisional", "availability", "failing", "benefits",
+LENDER_SCHEME_KEYS = ("id", "short", "short_hi", "name", "kind", "eligibility", "provisional", "availability", "failing", "benefits",
                       "citations", "verification", "status_note", "scheme_status", "lender_checks", "caveats")
 
 
@@ -515,8 +516,9 @@ def _step(case: dict) -> bool:
         if first:
             el = [r for r in case["schemes"] if r["eligibility"] == "eligible"]
             prov = [r["short"] for r in el if r.get("provisional")]
+            prov_hi = [r.get("short_hi", r["short"]) for r in el if r.get("provisional")]
             pen = f" ({', '.join(prov)} provisional until the agency verifies your declaration)" if prov else ""
-            phi = f" ({', '.join(prov)}, एजेंसी के सत्यापन तक अस्थायी)" if prov else ""
+            phi = f" ({', '.join(prov_hi)}: एजेंसी के सत्यापन तक अस्थायी)" if prov else ""
             say(case, f"I checked {len(case['schemes'])} schemes against their official rules. "
                       f"{len(el)} already fit{pen}; a few more depend on answers only you know; I'll ask only what matters.",
                 f"मैंने {len(case['schemes'])} योजनाओं को उनके आधिकारिक नियमों से जाँचा। {len(el)} पहले से उपयुक्त हैं{phi}; "
@@ -555,9 +557,10 @@ def _step(case: dict) -> bool:
         if u["action"] not in case["offered_actions"]:
             case["offered_actions"].append(u["action"])
             names = ", ".join(x["short"] for x in u["unlocks"])
+            names_hi = ", ".join(x.get("short_hi", x["short"]) for x in u["unlocks"])
             say(case, f"One step meets a condition for {names}: {u['label']['en']}. I can do it for you now, "
                       "it does not by itself guarantee any loan or cover.",
-                f"एक कदम से {names} की एक शर्त पूरी होती है: {u['label']['hi']}। मैं अभी आपके लिए कर सकता हूँ, "
+                f"एक कदम से {names_hi} की एक शर्त पूरी होती है: {u['label']['hi']}। मैं अभी आपके लिए कर सकता हूँ, "
                 "इससे अपने आप कोई ऋण या गारंटी पक्की नहीं होती।",
                 card={"type": "action", "action": u})
             case["pending"] = {"type": "action", "action": u["action"]}
@@ -667,7 +670,7 @@ def _step(case: dict) -> bool:
         say(case, f"Your file is ready for review.{extra_en} I will send it to {case['application']['lender']['name']} only after you approve.",
             f"आपकी फ़ाइल देखने के लिए तैयार है।{extra_hi} आपकी मंज़ूरी के बाद ही मैं इसे {case['application']['lender']['name']} भेजूँगा।",
             card={"type": "approval", "hash": case["application"]["hash"], "lenders": lenders,
-                  "lender": case["application"]["lender"], "offer": {k: o[k] for k in ("scheme_short", "amount", "rate", "tenure", "schedule_type")},
+                  "lender": case["application"]["lender"], "offer": {k: o.get(k) for k in ("scheme_short", "scheme_short_hi", "amount", "rate", "tenure", "schedule_type")},
                   "kfs": o.get("kfs"), "shares": [d["label"] for d in case["documents"]["items"]] + [
                       tr("Cash-flow summary & risk assessment", "नकदी प्रवाह सारांश और जोखिम आकलन")],
                   "otp_required": case["mode"] == "assisted",
@@ -953,7 +956,7 @@ def handle(case: dict, ev: dict, actor: str | None = None) -> dict:
             case["application"]["stale"] = True
         case["pending"] = None
         say(case, f"You chose {o['scheme_short']}, {inr(o['amount'])}, {sched} repayment.",
-            f"आपने चुना {o['scheme_short']}, {inr(o['amount'])}, {'मौसमी' if sched == 'seasonal' else 'समान'} किस्तें।", role="user",
+            f"आपने चुना {o.get('scheme_short_hi') or o['scheme_short']}, {inr(o['amount'])}, {'मौसमी' if sched == 'seasonal' else 'समान'} किस्तें।", role="user",
             src=["statement", "bureau"])
     elif t == "upload":
         # Clients can only *schedule* a document for a JanAI Café visit here. A document is

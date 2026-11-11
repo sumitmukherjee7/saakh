@@ -1,5 +1,6 @@
 id: pmegp_upgrade
 short: PMEGP 2nd loan
+short_hi: पीएमईजीपी दूसरा ऋण
 name: {en: "PMEGP, 2nd loan for upgrading existing PMEGP/REGP/MUDRA units", hi: "PMEGP, मौजूदा PMEGP/REGP/मुद्रा इकाइयों के उन्नयन हेतु दूसरा ऋण"}
 kind: subsidy_loan
 agency: {en: "KVIC / KVIB / DIC; loan from banks", hi: "केवीआईसी / केवीआईबी / DIC; ऋण बैंक से"}

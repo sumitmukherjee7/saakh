@@ -1,5 +1,6 @@
 id: msmed_delayed_payment
 short: MSMED 45-day rule
+short_hi: एमएसएमईडी 45-दिन नियम
 name: {en: "Protection against delayed payments (MSMED Act, 2006)", hi: "देरी से भुगतान के विरुद्ध सुरक्षा (एमएसएमईडी अधिनियम, 2006)"}
 kind: entitlement
 agency: {en: "Micro & Small Enterprise Facilitation Council (via MSME Samadhaan)", hi: "सूक्ष्म एवं लघु उद्यम सुविधा परिषद (एमएसएमई समाधान के माध्यम से)"}

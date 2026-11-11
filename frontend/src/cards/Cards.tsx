@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import { Bar, BarChart, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts";
 import { ShieldCheck, Lock, Clock, FileCheck2, Upload, Store, Sparkles, AlertTriangle, TrendingUp, Landmark, CheckCircle2, Info, Wand2 } from "lucide-react";
 import { BandChip, CiteChip, ProofTree, SimBadge, StatusPill, VerBadge } from "../components/common";
-import { inr, kb, mlabel, MONTHS, pct, t, UI, useLang } from "../util";
+import { inr, kb, mlabel, MONTHS, pct, sname, t, UI, useLang } from "../util";
+import { appStatus, consentStatus, factLabel, factValue, providerName, useFactReg, viaName } from "../facts";
 
 type Ctx = { upload: (doc: string, f: File) => void; uploadStatement: (f: File, consent: boolean, otp?: string) => void; demo: boolean };
 type P = { card: any; c: any; act: (ev: any) => void; active: boolean; ctx?: Ctx };
@@ -34,14 +35,16 @@ function SuggestionCard({ card, act, active }: P) {
 }
 
 function PlanCard({ card }: P) {
+  const { lang } = useLang();
+  const reg = useFactReg();
   const ex = card.extracted || {};
   const keys = Object.keys(ex);
   if (!keys.length) return null;
   return (
     <Shell>
-      <div className="label mb-1">Understood from your words</div>
+      <div className="label mb-1">{lang === "hi" ? "आपकी बात से समझा" : "Understood from your words"}</div>
       <div className="flex flex-wrap gap-1.5">
-        {keys.map((k) => <span key={k} className="pill bg-slate-100 text-ink-700">{k.replace(/_/g, " ")}: {typeof ex[k] === "number" ? inr(ex[k]) : String(ex[k]).replace(/_/g, " ")}</span>)}
+        {keys.map((k) => <span key={k} className="pill bg-slate-100 text-ink-700">{factLabel(reg, k, lang)}: {typeof ex[k] === "number" ? inr(ex[k]) : factValue(reg, k, ex[k], lang)}</span>)}
       </div>
     </Shell>
   );
@@ -66,8 +69,8 @@ function ConsentCard({ card, act, active, c }: P) {
               {x.required && <span className="pill bg-slate-100 text-ink-500 ml-1">{lang === "hi" ? "ज़रूरी" : "needed"}</span>}
               <span className="block text-ink-500">{t(x.data, lang)}</span>
               <span className="block text-ink-400 text-[11px] mt-0.5">
-                {lang === "hi" ? "उद्देश्य" : "Purpose"}: {t(x.purpose.text, lang)} · {x.provider} · {lang === "hi" ? "अवधि" : "valid"} {x.dataLife.value} {x.dataLife.unit.toLowerCase()}(s)
-                {!active && live[x.consentId] && <span className="ml-1 font-semibold">· {live[x.consentId]}</span>}
+                {lang === "hi" ? "उद्देश्य" : "Purpose"}: {t(x.purpose.text, lang)} · {providerName(x.provider, lang)} · {lang === "hi" ? `अवधि ${x.dataLife.value} महीने` : `valid ${x.dataLife.value} ${x.dataLife.unit.toLowerCase()}(s)`}
+                {!active && live[x.consentId] && <span className="ml-1 font-semibold">· {consentStatus(live[x.consentId], lang)}</span>}
               </span>
             </span>
           </label>
@@ -96,7 +99,7 @@ function QuestionCard({ card, act, active, c }: P) {
       {card.affects?.length > 0 && (
         <div className="flex flex-wrap items-center gap-1 mb-2">
           <span className="label">{lang === "hi" ? "इससे तय होगा" : "This decides"}</span>
-          {card.affects.slice(0, 4).map((a: any) => <span key={a.id} className="pill bg-saffron-50 text-saffron-600 border border-saffron-100">{a.short}</span>)}
+          {card.affects.slice(0, 4).map((a: any) => <span key={a.id} className="pill bg-saffron-50 text-saffron-600 border border-saffron-100">{sname(a, lang)}</span>)}
         </div>
       )}
       {active ? (
@@ -163,11 +166,12 @@ function InsightsCard({ card }: P) {
 
 export function SchemeRow({ r, open, onToggle }: { r: any; open: boolean; onToggle: () => void }) {
   const { lang } = useLang();
+  const reg = useFactReg();
   return (
     <div className="rounded-xl border border-slate-200">
       <button className="w-full flex items-center gap-2 p-2.5 text-left" onClick={onToggle}>
         <span className="flex-1">
-          <span className="font-semibold text-[13px] text-ink-900">{r.short}</span>
+          <span className="font-semibold text-[13px] text-ink-900">{sname(r, lang)}</span>
           {r.availability === "unconfirmed" && <span className="pill bg-rose-50 text-rose-700 border border-rose-200 ml-1">{lang === "hi" ? "स्थिति अपुष्ट" : "status unconfirmed"}</span>}
           {r.availability === "unavailable" && <span className="pill bg-slate-100 text-slate-600 border border-slate-200 ml-1">{lang === "hi" ? "अभी उपलब्ध नहीं" : "not available now"}</span>}
           <span className="block text-[11px] text-ink-400 line-clamp-1">{t(r.summary, lang)}</span>
@@ -182,7 +186,7 @@ export function SchemeRow({ r, open, onToggle }: { r: any; open: boolean; onTogg
             </div>
           )}
           <div className="mt-2"><ProofTree node={r.proof} cites={r.citations} /></div>
-          {r.missing_facts?.length > 0 && <div className="text-[11px] text-amber-700 mt-1">{lang === "hi" ? "अभी अज्ञात" : "Still unknown"}: {r.missing_facts.join(", ")}</div>}
+          {r.missing_facts?.length > 0 && <div className="text-[11px] text-amber-700 mt-1">{lang === "hi" ? "अभी अज्ञात" : "Still unknown"}: {r.missing_facts.map((k: string) => factLabel(reg, k, lang)).join(", ")}</div>}
           {r.benefits?.length > 0 && (
             <div className="mt-2 space-y-1">
               <div className="label">{lang === "hi" ? "लाभ" : "Benefits"}</div>
@@ -233,7 +237,7 @@ function ActionCard({ card, act, active }: P) {
     <Shell tone="bg-saffron-50 border-saffron-100">
       <div className="flex items-center gap-2"><Wand2 size={16} className="text-saffron-600" />
         <span className="font-semibold text-sm">{t(a.label, lang)}</span><SimBadge /></div>
-      <div className="text-[12px] text-ink-500 mt-1">{t(a.effort, lang)} · {lang === "hi" ? "खुलेगा" : "Unlocks"}: {a.unlocks.map((u: any) => u.short).join(", ")}</div>
+      <div className="text-[12px] text-ink-500 mt-1">{t(a.effort, lang)} · {lang === "hi" ? "इससे पूरी होगी शर्त" : "Unlocks"}: {a.unlocks.map((u: any) => sname(u, lang)).join(", ")}</div>
       {active && (
         <div className="flex gap-2 mt-3">
           <button className="btn-warn flex-1" onClick={() => act({ type: "action", action: a.action, go: true })}>{t(UI.doIt, lang)}</button>
@@ -274,7 +278,7 @@ function OfferBox({ o, act, active, score }: { o: any; act: any; active: boolean
     <div className="rounded-xl border border-slate-200 p-3">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <div className="text-[11px] text-ink-400">{o.scheme_short}</div>
+          <div className="text-[11px] text-ink-400">{sname(o, lang)}</div>
           <div className="text-2xl font-bold text-ink-900">{inr(o.amount)}</div>
           {o.amount < o.requested && <div className="text-[11px] text-ink-500">{lang === "hi" ? "माँगा" : "asked"} {inr(o.requested)}, {t(o.why, lang)}</div>}
           {!!o.provisional?.length && <div className="mt-1 text-[11px] rounded-md bg-amber-50 text-amber-800 px-2 py-1">
@@ -286,7 +290,7 @@ function OfferBox({ o, act, active, score }: { o: any; act: any; active: boolean
         <span className="pill bg-slate-100 text-ink-700">{(o.rate * 100).toFixed(1)}% · {o.tenure} {lang === "hi" ? "महीने" : "months"}</span>
         {o.subsidy > 0 && <span className="pill bg-emerald-100 text-emerald-800">{lang === "hi" ? "सब्सिडी" : "Subsidy"} {inr(o.subsidy)}</span>}
         {o.grants?.map((g: any, i: number) => <span key={i} className="pill bg-emerald-100 text-emerald-800">{t(g.label, lang)} {g.display}</span>)}
-        {o.cgtmse_possible && <span className="pill bg-sky-50 text-sky-800 border border-sky-200" title="Only if your lender is a CGTMSE member and chooses to obtain cover">
+        {o.cgtmse_possible && <span className="pill bg-sky-50 text-sky-800 border border-sky-200" title={lang === "hi" ? "तभी, जब आपका बैंक CGTMSE सदस्य हो और गारंटी लेना चुने" : "Only if your lender is a CGTMSE member and chooses to obtain cover"}>
           {lang === "hi" ? "CGTMSE गारंटी संभव (बैंक तय करेगा)" : "CGTMSE cover possible (lender decides)"}</span>}
       </div>
       <div className="flex gap-1 mt-3">
@@ -379,7 +383,7 @@ function DocumentsCard({ c, act, active, ctx }: P) {
   if (!d) return null;
   const how: any = { auto: ["bg-emerald-100 text-emerald-800", lang === "hi" ? "अपने आप" : "fetched"], generated: ["bg-sky-100 text-sky-800", lang === "hi" ? "बनाया" : "prepared"],
     done: ["bg-emerald-100 text-emerald-800", lang === "hi" ? "हो गया" : "done"], upload: ["bg-amber-100 text-amber-800", lang === "hi" ? "आप करें" : "you"],
-    capture: ["bg-amber-100 text-amber-800", lang === "hi" ? "आप करें" : "you"], offline: ["bg-violet-100 text-violet-800", "JanAI Café"], paid: ["bg-rose-100 text-rose-800", "paid"] };
+    capture: ["bg-amber-100 text-amber-800", lang === "hi" ? "आप करें" : "you"], offline: ["bg-violet-100 text-violet-800", lang === "hi" ? "JanAI कैफ़े" : "JanAI Café"], paid: ["bg-rose-100 text-rose-800", lang === "hi" ? "शुल्क वाला" : "paid"] };
   const isPending = (i: any) => i.status === "pending" && !i.post_sanction && !c.uploads?.[i.doc] && !c.scheduled?.includes(i.doc);
   return (
     <Shell>
@@ -389,17 +393,17 @@ function DocumentsCard({ c, act, active, ctx }: P) {
       <div className="mt-2 divide-y divide-slate-100">
         {d.items.map((i: any) => (
           <div key={i.doc} className="py-1.5 flex items-center gap-2 text-[13px]">
-            <span className="flex-1">{t(i.label, lang)}<span className="block text-[10px] text-ink-400">{i.via} · {i.serves.map((s: any) => t(s.label, lang)).slice(0, 2).join(", ")}{i.post_sanction ? " · after sanction" : ""}</span></span>
-            {c.scheduled?.includes(i.doc) ? <span className="pill bg-violet-100 text-violet-800">JanAI Café</span>
+            <span className="flex-1">{t(i.label, lang)}<span className="block text-[10px] text-ink-400">{viaName(i.via, lang)} · {i.serves.map((s: any) => t(s.label, lang)).slice(0, 2).join(", ")}{i.post_sanction ? (lang === "hi" ? " · स्वीकृति के बाद" : " · after sanction") : ""}</span></span>
+            {c.scheduled?.includes(i.doc) ? <span className="pill bg-violet-100 text-violet-800">{lang === "hi" ? "JanAI कैफ़े" : "JanAI Café"}</span>
               : c.uploads?.[i.doc] ? <span className="pill bg-emerald-100 text-emerald-800" title={t(c.uploads[i.doc].note, lang)}>
-                  {lang === "hi" ? "प्राप्त" : "received"} · {c.uploads[i.doc].sha256.slice(0, 8)}{c.uploads[i.doc].demo_sample ? " · demo" : ""}</span>
+                  {lang === "hi" ? "प्राप्त" : "received"} · {c.uploads[i.doc].sha256.slice(0, 8)}{c.uploads[i.doc].demo_sample ? (lang === "hi" ? " · डेमो" : " · demo") : ""}</span>
               : <span className={`pill ${how[i.how]?.[0]}`}>{how[i.how]?.[1]}</span>}
             {active && isPending(i) && (
               <span className="flex gap-1">
                 <label className="btn-primary !px-2 !py-1 !text-[11px] cursor-pointer"><Upload size={12} />{t(UI.upload, lang)}
                   <input type="file" accept="application/pdf,image/jpeg,image/png" capture={i.doc === "selfie" ? "user" : undefined} className="hidden"
                     onChange={(e) => { const f = e.target.files?.[0]; if (f) ctx?.upload(i.doc, f); }} /></label>
-                <button className="btn-ghost !px-2 !py-1 !text-[11px]" title="Do this at a JanAI Café" onClick={() => act({ type: "upload", doc: i.doc, assisted: true })}><Store size={12} /></button>
+                <button className="btn-ghost !px-2 !py-1 !text-[11px]" title={t(UI.atCafe, lang)} onClick={() => act({ type: "upload", doc: i.doc, assisted: true })}><Store size={12} /></button>
               </span>
             )}
           </div>
@@ -422,9 +426,9 @@ function ApprovalCard({ card, act, active, c }: P) {
       <div className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-600" />
         <span className="font-semibold text-sm">{lang === "hi" ? "मंज़ूरी से पहले देखें" : "Review before you approve"}</span></div>
       <div className="grid grid-cols-2 gap-2 mt-2 text-[13px]">
-        <div><div className="label">{lang === "hi" ? "योजना" : "Scheme"}</div><b>{o.scheme_short}</b></div>
+        <div><div className="label">{lang === "hi" ? "योजना" : "Scheme"}</div><b>{sname(o, lang)}</b></div>
         <div><div className="label">{lang === "hi" ? "राशि" : "Amount"}</div><b>{inr(o.amount)}</b></div>
-        <div><div className="label">{lang === "hi" ? "ब्याज" : "Rate"}</div>{(o.rate * 100).toFixed(1)}% · {o.tenure}m · {o.schedule_type}</div>
+        <div><div className="label">{lang === "hi" ? "ब्याज" : "Rate"}</div>{(o.rate * 100).toFixed(1)}% · {o.tenure}{lang === "hi" ? " माह" : "m"} · {appStatus(o.schedule_type, lang)}</div>
         <div><div className="label">APR</div>{card.kfs ? pct(o.schedule_type === "seasonal" ? card.kfs.apr_seasonal : card.kfs.apr_flat) : "-"}</div>
       </div>
       <div className="mt-2">
@@ -441,7 +445,7 @@ function ApprovalCard({ card, act, active, c }: P) {
       {!!card.pending_items?.length && <div className="mt-2 text-[12px] rounded-lg bg-amber-50 text-amber-800 p-2">
         {lang === "hi" ? "अभी बाकी (बैंक इन्हें बाकी के रूप में देखेगा): " : "Still pending (the bank will see these as pending): "}
         {card.pending_items.map((d: string) => { const it = c.documents?.items?.find((x: any) => x.doc === d); return it ? t(it.label, lang) : d.replace(/_/g, " "); }).join(", ")}</div>}
-      <div className="mt-2 text-[10px] font-mono text-ink-400 break-all">file hash {card.hash}</div>
+      <div className="mt-2 text-[10px] font-mono text-ink-400 break-all">{lang === "hi" ? "फ़ाइल हैश" : "file hash"} {card.hash}</div>
       {active && (
         <>
           <label className="flex gap-2 mt-3 text-[13px]">
@@ -455,7 +459,8 @@ function ApprovalCard({ card, act, active, c }: P) {
           </div>
         </>
       )}
-      {!active && c.approval && <div className="mt-2 text-[12px] text-emerald-700">✓ Approved {c.approval.ts} · {c.approval.method}</div>}
+      {!active && c.approval && <div className="mt-2 text-[12px] text-emerald-700">✓ {lang === "hi" ? "मंज़ूरी दी" : "Approved"} {c.approval.ts} · {lang === "hi"
+        ? (String(c.approval.method).startsWith("OTP") ? "उद्यमी के फ़ोन पर OTP से (सहायता मोड)" : "ऐप में पुष्टि") : c.approval.method}</div>}
     </Shell>
   );
 }
@@ -471,9 +476,10 @@ function SubmittedCard({ card }: P) {
 }
 
 function LenderCard({ card }: P) {
+  const { lang } = useLang();
   const d = card.decision;
   const tone = d.decision === "sanction" ? "bg-emerald-50 border-emerald-200" : d.decision === "query" ? "bg-amber-50 border-amber-200" : "bg-rose-50 border-rose-200";
-  return <Shell tone={tone}><div className="text-sm font-semibold capitalize">{d.decision}{d.amount ? ` · ${inr(d.amount)}` : ""}</div>{d.note && <div className="text-[12px]">{d.note}</div>}</Shell>;
+  return <Shell tone={tone}><div className="text-sm font-semibold capitalize">{lang === "hi" ? `बैंक: ${appStatus(d.decision, lang)}` : d.decision}{d.amount ? ` · ${inr(d.amount)}` : ""}</div>{d.note && <div className="text-[12px]">{d.note}</div>}</Shell>;
 }
 
 function ExplanationCard({ card, c }: P) {

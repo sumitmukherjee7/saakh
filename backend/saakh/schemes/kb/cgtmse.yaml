@@ -1,5 +1,6 @@
 id: cgtmse
 short: CGTMSE
+short_hi: सीजीटीएमएसई
 name: {en: "Credit Guarantee for Micro & Small Enterprises (CGTMSE)", hi: "सूक्ष्म एवं लघु उद्यम ऋण गारंटी (CGTMSE)"}
 kind: guarantee
 agency: {en: "CGTMSE, cover is sought by your lender, not by you", hi: "CGTMSE, गारंटी आपका बैंक लेता है, आप नहीं"}
